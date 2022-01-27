@@ -5,7 +5,7 @@ const require = createRequire(import.meta.url);
 async function replaceSchemaReferences(manager, schema, mainSchema) {
   if (schema["$ref"] && schema["$ref"].startsWith("schema:")) {
     const alias = schema["$ref"].split("schema:")[1];
-    const newSchema = require(`../schemas/${alias}.schema.json`);
+    const newSchema = require(`./schemas/${alias}.schema.json`);
     let schemaId = manager.getSchemaID(alias);
     if (!schemaId) {
       schemaId = await manager.createSchema(alias, newSchema);
@@ -57,7 +57,7 @@ async function replaceSchemaReferences(manager, schema, mainSchema) {
 }
 
 export async function createModel(manager, className) {
-  const schema = require(`../schemas/${className}.schema.json`);
+  const schema = require(`./schemas/${className}.schema.json`);
   await replaceSchemaReferences(manager, schema);
 
   const schemaId = await manager.createSchema(className, schema);

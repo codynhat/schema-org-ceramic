@@ -4,6 +4,7 @@
   "description": "Generate Ceramic schemas and data models from Schema.org classes",
   "author": "Cody Hatfield <@codynhat>",
   "license": "MIT",
+  "main": "index.mjs",
   "files": [
     "schemas/"
   ],

@@ -8,7 +8,7 @@ import { Ed25519Provider } from "key-did-provider-ed25519";
 import { getResolver } from "key-did-resolver";
 import { fromString } from "uint8arrays";
 import { createRequire } from "module";
-import { createModel } from "../src/createModel.mjs";
+import { createModel } from "../index.mjs";
 
 if (!process.env.SEED) {
   throw new Error("Missing SEED environment variable");
