@@ -40,7 +40,7 @@ ceramic.did = did;
 // Create a manager for the model
 const manager = new ModelManager(ceramic);
 
-await createModel(manager, className);
+await createModel(ceramic, manager, className);
 
 // Write model to JSON file
 await writeFile(
