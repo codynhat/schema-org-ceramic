@@ -73,8 +73,16 @@ async function replaceSchemaReferences(schema, mainSchema) {
         await replaceSchemaReferences(prop, mainSchema ?? schema);
       }
     }
+
+    if (schema.definitions != null) {
+      for (let i = 0; i < Object.values(schema.definitions).length; i++) {
+        const prop = Object.values(schema.definitions)[i];
+        await replaceSchemaReferences(prop, mainSchema ?? schema);
+      }
+    }
   }
 
+  // Update oneOf, anyOf, allOf
   for (let x = 0; x < ["oneOf", "anyOf", "allOf"].length; x++) {
     const key = ["oneOf", "anyOf", "allOf"][x];
     if (schema[key] != null) {
