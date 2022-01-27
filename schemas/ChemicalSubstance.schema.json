@@ -1,0 +1,333 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChemicalSubstance",
+  "description": "A chemical substance is 'a portion of matter of constant composition, composed of molecular entities of the same type or of different types' (source: [ChEBI:59999](https://www.ebi.ac.uk/chebi/searchId.do?chebiId=59999)).",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "Any biological, chemical, or biochemical thing. For example: a protein; a gene; a chemical; a synthetic chemical.",
+      "$ref": "#/definitions/BioChemEntity"
+    }
+  ],
+  "properties": {
+    "chemicalComposition": {
+      "description": "The chemical composition describes the identity and relative ratio of the chemical elements that make up the substance.",
+      "type": "string"
+    },
+    "chemicalRole": {
+      "description": "A role played by the BioChemEntity within a chemical context.",
+      "oneOf": [
+        { "$ref": "schema:DefinedTerm" },
+        { "type": "array", "items": { "$ref": "schema:DefinedTerm" } }
+      ]
+    },
+    "potentialUse": {
+      "description": "Intended use of the BioChemEntity by humans.",
+      "oneOf": [
+        { "$ref": "schema:DefinedTerm" },
+        { "type": "array", "items": { "$ref": "schema:DefinedTerm" } }
+      ]
+    }
+  },
+  "definitions": {
+    "BioChemEntity": {
+      "title": "BioChemEntity",
+      "description": "Any biological, chemical, or biochemical thing. For example: a protein; a gene; a chemical; a synthetic chemical.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of item.",
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "properties": {
+        "associatedDisease": {
+          "description": "Disease associated to this BioChemEntity. Such disease can be a MedicalCondition or a URL. If you want to add an evidence supporting the association, please use PropertyValue.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "schema:MedicalCondition" },
+                { "$ref": "schema:PropertyValue" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "schema:MedicalCondition" },
+                  { "$ref": "schema:PropertyValue" }
+                ]
+              }
+            }
+          ]
+        },
+        "bioChemInteraction": {
+          "description": "A BioChemEntity that is known to interact with this item.",
+          "oneOf": [
+            { "$ref": "schema:BioChemEntity" },
+            { "type": "array", "items": { "$ref": "schema:BioChemEntity" } }
+          ]
+        },
+        "bioChemSimilarity": {
+          "description": "A similar BioChemEntity, e.g., obtained by fingerprint similarity algorithms.",
+          "oneOf": [
+            { "$ref": "schema:BioChemEntity" },
+            { "type": "array", "items": { "$ref": "schema:BioChemEntity" } }
+          ]
+        },
+        "biologicalRole": {
+          "description": "A role played by the BioChemEntity within a biological context.",
+          "oneOf": [
+            { "$ref": "schema:DefinedTerm" },
+            { "type": "array", "items": { "$ref": "schema:DefinedTerm" } }
+          ]
+        },
+        "hasBioChemEntityPart": {
+          "description": "Indicates a BioChemEntity that (in some sense) has this BioChemEntity as a part. ",
+          "oneOf": [
+            { "$ref": "schema:BioChemEntity" },
+            { "type": "array", "items": { "$ref": "schema:BioChemEntity" } }
+          ]
+        },
+        "hasMolecularFunction": {
+          "description": "Molecular function performed by this BioChemEntity; please use PropertyValue if you want to include any evidence.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "schema:DefinedTerm" },
+                { "$ref": "schema:PropertyValue" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "schema:DefinedTerm" },
+                  { "$ref": "schema:PropertyValue" }
+                ]
+              }
+            }
+          ]
+        },
+        "hasRepresentation": {
+          "description": "A common representation such as a protein sequence or chemical structure for this entity. For images use schema.org/image.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "type": "string" },
+                { "$ref": "schema:PropertyValue" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "type": "string" },
+                  { "$ref": "schema:PropertyValue" }
+                ]
+              }
+            }
+          ]
+        },
+        "isEncodedByBioChemEntity": {
+          "description": "Another BioChemEntity encoding by this one.",
+          "oneOf": [
+            { "$ref": "schema:Gene" },
+            { "type": "array", "items": { "$ref": "schema:Gene" } }
+          ]
+        },
+        "isInvolvedInBiologicalProcess": {
+          "description": "Biological process this BioChemEntity is involved in; please use PropertyValue if you want to include any evidence.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "schema:DefinedTerm" },
+                { "$ref": "schema:PropertyValue" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "schema:DefinedTerm" },
+                  { "$ref": "schema:PropertyValue" }
+                ]
+              }
+            }
+          ]
+        },
+        "isLocatedInSubcellularLocation": {
+          "description": "Subcellular location where this BioChemEntity is located; please use PropertyValue if you want to include any evidence.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "schema:DefinedTerm" },
+                { "$ref": "schema:PropertyValue" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "schema:DefinedTerm" },
+                  { "$ref": "schema:PropertyValue" }
+                ]
+              }
+            }
+          ]
+        },
+        "isPartOfBioChemEntity": {
+          "description": "Indicates a BioChemEntity that is (in some sense) a part of this BioChemEntity. ",
+          "oneOf": [
+            { "$ref": "schema:BioChemEntity" },
+            { "type": "array", "items": { "$ref": "schema:BioChemEntity" } }
+          ]
+        },
+        "taxonomicRange": {
+          "description": "The taxonomic grouping of the organism that expresses, encodes, or in someway related to the BioChemEntity.",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "schema:DefinedTerm" },
+            { "$ref": "schema:Taxon" }
+          ]
+        }
+      }
+    },
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "schema:PropertyValue" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "schema:ImageObject" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "schema:ImageObject" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "schema:CreativeWork" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "schema:CreativeWork" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "schema:Action" },
+            { "type": "array", "items": { "$ref": "schema:Action" } }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "schema:CreativeWork" },
+                { "$ref": "schema:Event" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "schema:CreativeWork" },
+                  { "$ref": "schema:Event" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    }
+  }
+}

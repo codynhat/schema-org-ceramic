@@ -1,0 +1,26 @@
+{
+  "name": "schema-org-ceramic",
+  "version": "1.0.0",
+  "description": "Generate Ceramic schemas and data models from Schema.org classes",
+  "author": "Cody Hatfield <@codynhat>",
+  "license": "MIT",
+  "files": [
+    "schemas/"
+  ],
+  "scripts": {
+    "build-schemas": "rimraf 'schemas/*' && node --experimental-json-modules ./scripts/build-schemas.mjs"
+  },
+  "devDependencies": {
+    "@ceramicnetwork/http-client": "^1.5.7",
+    "@glazed/devtools": "^0.1.3",
+    "dids": "^2.4.3",
+    "key-did-provider-ed25519": "^1.1.0",
+    "key-did-resolver": "^1.4.4",
+    "lodash": "^4.17.21",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "schema-org-json-schemas": "^2.1.4",
+    "typescript": "^4.5.5",
+    "uint8arrays": "^3.0.0"
+  }
+}

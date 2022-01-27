@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DataType",
+  "description": "The basic data types such as Integers, Strings, etc.",
+  "type": "object"
+}

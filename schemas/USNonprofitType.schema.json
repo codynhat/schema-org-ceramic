@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "USNonprofitType",
+  "description": "USNonprofitType: Non-profit organization type originating from the United States.",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "NonprofitType enumerates several kinds of official non-profit types of which a non-profit organization can be.",
+      "$ref": "#/definitions/NonprofitType"
+    }
+  ],
+  "definitions": {
+    "NonprofitType": {
+      "title": "NonprofitType",
+      "description": "NonprofitType enumerates several kinds of official non-profit types of which a non-profit organization can be.",
+      "type": "object"
+    }
+  }
+}

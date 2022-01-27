@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GenderType",
+  "description": "An enumeration of genders.",
+  "type": "string",
+  "oneOf": [
+    { "description": "The female gender.", "const": "Female" },
+    { "description": "The male gender.", "const": "Male" }
+  ]
+}

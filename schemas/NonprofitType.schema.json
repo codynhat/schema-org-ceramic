@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NonprofitType",
+  "description": "NonprofitType enumerates several kinds of official non-profit types of which a non-profit organization can be.",
+  "type": "object"
+}

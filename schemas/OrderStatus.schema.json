@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderStatus",
+  "description": "Enumerated status values for Order.",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "Lists or enumerations dealing with status types.",
+      "$ref": "#/definitions/StatusEnumeration"
+    }
+  ],
+  "definitions": {
+    "StatusEnumeration": {
+      "title": "StatusEnumeration",
+      "description": "Lists or enumerations dealing with status types.",
+      "type": "object"
+    }
+  }
+}

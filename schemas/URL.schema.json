@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "URL",
+  "description": "Data type: URL.",
+  "type": "object",
+  "allOf": [
+    { "description": "Data type: Text.", "$ref": "#/definitions/Text" }
+  ],
+  "definitions": { "Text": { "type": "string" } }
+}
