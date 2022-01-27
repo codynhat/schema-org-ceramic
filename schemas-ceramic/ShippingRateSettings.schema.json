@@ -1,0 +1,255 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ShippingRateSettings",
+  "description": "A ShippingRateSettings represents re-usable pieces of shipping information. It is designed for publication on an URL that may be referenced via the [[shippingSettingsLink]] property of an [[OfferShippingDetails]]. Several occurrences can be published, distinguished and matched (i.e. identified/referenced) by their different values for [[shippingLabel]].",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.",
+      "$ref": "#/definitions/StructuredValue"
+    }
+  ],
+  "properties": {
+    "doesNotShip": {
+      "description": "Indicates when shipping to a particular [[shippingDestination]] is not available.",
+      "type": "boolean"
+    },
+    "freeShippingThreshold": {
+      "description": "A monetary value above which (or equal to) the shipping rate becomes free. Intended to be used via an [[OfferShippingDetails]] with [[shippingSettingsLink]] matching this [[ShippingRateSettings]].",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/DeliveryChargeSpecificationStreamId" },
+            { "$ref": "#/definitions/MonetaryAmountStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/DeliveryChargeSpecificationStreamId" },
+              { "$ref": "#/definitions/MonetaryAmountStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "isUnlabelledFallback": {
+      "description": "This can be marked 'true' to indicate that some published [[DeliveryTimeSettings]] or [[ShippingRateSettings]] are intended to apply to all [[OfferShippingDetails]] published by the same merchant, when referenced by a [[shippingSettingsLink]] in those settings. It is not meaningful to use a 'true' value for this property alongside a transitTimeLabel (for [[DeliveryTimeSettings]]) or shippingLabel (for [[ShippingRateSettings]]), since this property is for use with unlabelled settings.",
+      "type": "boolean"
+    },
+    "shippingDestination": {
+      "description": "indicates (possibly multiple) shipping destinations. These can be defined in several ways e.g. postalCode ranges.",
+      "oneOf": [
+        { "$ref": "#/definitions/DefinedRegionStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DefinedRegionStreamId" }
+        }
+      ]
+    },
+    "shippingLabel": {
+      "description": "Label to match an [[OfferShippingDetails]] with a [[ShippingRateSettings]] (within the context of a [[shippingSettingsLink]] cross-reference).",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "shippingRate": {
+      "description": "The shipping rate is the cost of shipping to the specified destination. Typically, the maxValue and currency values (of the [[MonetaryAmount]]) are most appropriate.",
+      "$ref": "#/definitions/MonetaryAmountStreamId"
+    }
+  },
+  "definitions": {
+    "StructuredValue": {
+      "title": "StructuredValue",
+      "description": "Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+          "$ref": "#/definitions/Intangible"
+        }
+      ]
+    },
+    "Intangible": {
+      "title": "Intangible",
+      "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of item.",
+          "$ref": "#/definitions/Thing"
+        }
+      ]
+    },
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PropertyValueStreamId" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/CreativeWorkStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/CreativeWorkStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStreamId" }
+            }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/CreativeWorkStreamId" },
+                { "$ref": "#/definitions/EventStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/CreativeWorkStreamId" },
+                  { "$ref": "#/definitions/EventStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "DeliveryChargeSpecificationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146pppopi0hnd5jh4g67u8wskrs9h99evcjmx8sxa53d2drtbd6o"
+    },
+    "MonetaryAmountStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14at9lwb418r4g5wkqfzggjhclv15ea25dz0lh1f8xwb55lwowti"
+    },
+    "DefinedRegionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14aif9znqmr7zlqgji35b281bdvasnfcig8ztdboguscz7x8aflo"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "ImageObjectStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+    },
+    "CreativeWorkStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+    },
+    "ActionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+    },
+    "EventStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+    }
+  }
+}

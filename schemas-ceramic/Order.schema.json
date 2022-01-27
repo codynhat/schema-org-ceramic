@@ -1,0 +1,380 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Order",
+  "description": "An order is a confirmation of a transaction (a receipt), which can contain multiple line items, each represented by an Offer that has been accepted by the customer.",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+      "$ref": "#/definitions/Intangible"
+    }
+  ],
+  "properties": {
+    "acceptedOffer": {
+      "description": "The offer(s) -- e.g., product, quantity and price combinations -- included in the order.",
+      "oneOf": [
+        { "$ref": "#/definitions/OfferStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/OfferStreamId" } }
+      ]
+    },
+    "billingAddress": {
+      "description": "The billing address for the order.",
+      "$ref": "#/definitions/PostalAddressStreamId"
+    },
+    "broker": {
+      "description": "An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            { "$ref": "#/definitions/PersonStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/OrganizationStreamId" },
+              { "$ref": "#/definitions/PersonStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "confirmationNumber": {
+      "description": "A number that confirms the given order or payment has been received.",
+      "type": "string"
+    },
+    "customer": {
+      "description": "Party placing the order or paying the invoice.",
+      "anyOf": [
+        { "$ref": "#/definitions/OrganizationStreamId" },
+        { "$ref": "#/definitions/PersonStreamId" }
+      ]
+    },
+    "discount": {
+      "description": "Any discount applied (to an Order).",
+      "anyOf": [{ "type": "number" }, { "type": "string" }]
+    },
+    "discountCode": {
+      "description": "Code used to redeem a discount.",
+      "type": "string"
+    },
+    "discountCurrency": {
+      "description": "The currency of the discount.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. \"BTC\"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. \"Ithaca HOUR\".",
+      "type": "string"
+    },
+    "isGift": {
+      "description": "Was the offer accepted as a gift for someone other than the buyer.",
+      "type": "boolean"
+    },
+    "merchant": {
+      "description": "'merchant' is an out-dated term for 'seller'.",
+      "anyOf": [
+        { "$ref": "#/definitions/OrganizationStreamId" },
+        { "$ref": "#/definitions/PersonStreamId" }
+      ]
+    },
+    "orderDate": {
+      "description": "Date order was placed.",
+      "anyOf": [
+        { "type": "string", "format": "date" },
+        { "type": "string", "format": "date-time" }
+      ]
+    },
+    "orderDelivery": {
+      "description": "The delivery of the parcel related to this order or order item.",
+      "$ref": "#/definitions/ParcelDeliveryStreamId"
+    },
+    "orderNumber": {
+      "description": "The identifier of the transaction.",
+      "type": "string"
+    },
+    "orderStatus": {
+      "description": "The current status of the order.",
+      "$ref": "#/definitions/OrderStatusStreamId"
+    },
+    "orderedItem": {
+      "description": "The item ordered.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/OrderItemStreamId" },
+            { "$ref": "#/definitions/ProductStreamId" },
+            { "$ref": "#/definitions/ServiceStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/OrderItemStreamId" },
+              { "$ref": "#/definitions/ProductStreamId" },
+              { "$ref": "#/definitions/ServiceStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "partOfInvoice": {
+      "description": "The order is being paid as part of the referenced Invoice.",
+      "$ref": "#/definitions/InvoiceStreamId"
+    },
+    "paymentDue": {
+      "description": "The date that payment is due.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "paymentDueDate": {
+      "description": "The date that payment is due.",
+      "anyOf": [
+        { "type": "string", "format": "date" },
+        { "type": "string", "format": "date-time" }
+      ]
+    },
+    "paymentMethod": {
+      "description": "The name of the credit card or other method of payment for the order.",
+      "$ref": "#/definitions/PaymentMethodStreamId"
+    },
+    "paymentMethodId": {
+      "description": "An identifier for the method of payment used (e.g. the last 4 digits of the credit card).",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "paymentUrl": {
+      "description": "The URL for sending a payment.",
+      "type": "string",
+      "format": "uri"
+    },
+    "seller": {
+      "description": "An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.",
+      "anyOf": [
+        { "$ref": "#/definitions/OrganizationStreamId" },
+        { "$ref": "#/definitions/PersonStreamId" }
+      ]
+    }
+  },
+  "definitions": {
+    "Intangible": {
+      "title": "Intangible",
+      "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of item.",
+          "$ref": "#/definitions/Thing"
+        }
+      ]
+    },
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PropertyValueStreamId" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/CreativeWorkStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/CreativeWorkStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStreamId" }
+            }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/CreativeWorkStreamId" },
+                { "$ref": "#/definitions/EventStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/CreativeWorkStreamId" },
+                  { "$ref": "#/definitions/EventStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "OfferStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145c2jnc9g1v15f89uteou91ebt48pdighlctirasnxte9r0o8y7"
+    },
+    "PostalAddressStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a4brivqraxql3nu7w003p0qb33jnlas5zuiuue6bfcokyl48l6"
+    },
+    "OrganizationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+    },
+    "PersonStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b0q0zecwbrtioa6v5z20xmbarlw0k18secwsjcezbfu49dhdt"
+    },
+    "ParcelDeliveryStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146r8vsbtzhf4jwp9hptsqctord4rzepz5z1xi0lkh640d3gypmx"
+    },
+    "OrderStatusStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14av2rhk39y7do54v43hmc1edf6gh4p6qbyd5qcdpyczo0hgpcd4"
+    },
+    "OrderItemStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bh10gir618wbmc1xv99gf38r0yh06ik59jfqhh89dfvx1qvpd6"
+    },
+    "ProductStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1475y89ao9j60hp1g1aur4wlkykebmhgjsqc8vcyhwcl9ioiw8ry"
+    },
+    "ServiceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apaxtzw046uiy4u56c12lmh3emlkf0t7b92lmdnq8txtgcb4nr"
+    },
+    "InvoiceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b2kzb5cxeohbuvmde4h0znboen3ywflexz1oivnz3b3odj9pz3"
+    },
+    "PaymentMethodStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145vja3ygmcfigis6hanbkftar085uocj80fb3y5tgz173w984l1"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "ImageObjectStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+    },
+    "CreativeWorkStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+    },
+    "ActionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+    },
+    "EventStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+    }
+  }
+}

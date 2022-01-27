@@ -1,0 +1,646 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Offer",
+  "description": "An offer to transfer some rights to an item or to provide a service — for example, an offer to sell tickets to an event, to rent the DVD of a movie, to stream a TV show over the internet, to repair a motorcycle, or to loan a book.\\n\\nNote: As the [[businessFunction]] property, which identifies the form of offer (e.g. sell, lease, repair, dispose), defaults to http://purl.org/goodrelations/v1#Sell; an Offer without a defined businessFunction value can be assumed to be an offer to sell.\\n\\nFor [GTIN](http://www.gs1.org/barcodes/technical/idkeys/gtin)-related fields, see [Check Digit calculator](http://www.gs1.org/barcodes/support/check_digit_calculator) and [validation guide](http://www.gs1us.org/resources/standards/gtin-validation-guide) from [GS1](http://www.gs1.org/).",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+      "$ref": "#/definitions/Intangible"
+    }
+  ],
+  "properties": {
+    "acceptedPaymentMethod": {
+      "description": "The payment method(s) accepted by seller for this offer.",
+      "anyOf": [
+        { "$ref": "#/definitions/LoanOrCreditStreamId" },
+        { "$ref": "#/definitions/PaymentMethodStreamId" }
+      ]
+    },
+    "addOn": {
+      "description": "An additional offer that can only be obtained in combination with the first base offer (e.g. supplements and extensions that are available for a surcharge).",
+      "oneOf": [
+        { "$ref": "#/definitions/OfferStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/OfferStreamId" } }
+      ]
+    },
+    "advanceBookingRequirement": {
+      "description": "The amount of time that is required between accepting the offer and the actual usage of the resource or service.",
+      "$ref": "#/definitions/QuantitativeValueStreamId"
+    },
+    "aggregateRating": {
+      "description": "The overall rating, based on a collection of reviews or ratings, of the item.",
+      "$ref": "#/definitions/AggregateRatingStreamId"
+    },
+    "areaServed": {
+      "description": "The geographic area where a service or offered item is provided.",
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "#/definitions/AdministrativeAreaStreamId" },
+        { "$ref": "#/definitions/GeoShapeStreamId" },
+        { "$ref": "#/definitions/PlaceStreamId" }
+      ]
+    },
+    "availability": {
+      "description": "The availability of this item—for example In stock, Out of stock, Pre-order, etc.",
+      "$ref": "#/definitions/ItemAvailabilityStreamId"
+    },
+    "availabilityEnds": {
+      "description": "The end of the availability of the product or service included in the offer.",
+      "anyOf": [
+        { "type": "string", "format": "date" },
+        { "type": "string", "format": "date-time" },
+        { "type": "string", "format": "time" }
+      ]
+    },
+    "availabilityStarts": {
+      "description": "The beginning of the availability of the product or service included in the offer.",
+      "anyOf": [
+        { "type": "string", "format": "date" },
+        { "type": "string", "format": "date-time" },
+        { "type": "string", "format": "time" }
+      ]
+    },
+    "availableAtOrFrom": {
+      "description": "The place(s) from which the offer can be obtained (e.g. store locations).",
+      "$ref": "#/definitions/PlaceStreamId"
+    },
+    "availableDeliveryMethod": {
+      "description": "The delivery method(s) available for this offer.",
+      "$ref": "#/definitions/DeliveryMethodStreamId"
+    },
+    "businessFunction": {
+      "description": "The business function (e.g. sell, lease, repair, dispose) of the offer or component of a bundle (TypeAndQuantityNode). The default is http://purl.org/goodrelations/v1#Sell.",
+      "$ref": "#/definitions/BusinessFunctionStreamId"
+    },
+    "category": {
+      "description": "A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PhysicalActivityCategoryStreamId" },
+            { "$ref": "#/definitions/ThingStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "type": "string", "format": "uri" },
+              { "type": "string" },
+              { "$ref": "#/definitions/PhysicalActivityCategoryStreamId" },
+              { "$ref": "#/definitions/ThingStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "deliveryLeadTime": {
+      "description": "The typical delay between the receipt of the order and the goods either leaving the warehouse or being prepared for pickup, in case the delivery method is on site pickup.",
+      "$ref": "#/definitions/QuantitativeValueStreamId"
+    },
+    "eligibleCustomerType": {
+      "description": "The type(s) of customers for which the given offer is valid.",
+      "$ref": "#/definitions/BusinessEntityTypeStreamId"
+    },
+    "eligibleDuration": {
+      "description": "The duration for which the given offer is valid.",
+      "$ref": "#/definitions/QuantitativeValueStreamId"
+    },
+    "eligibleQuantity": {
+      "description": "The interval and unit of measurement of ordering quantities for which the offer or price specification is valid. This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.",
+      "$ref": "#/definitions/QuantitativeValueStreamId"
+    },
+    "eligibleRegion": {
+      "description": "The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid.\\n\\nSee also [[ineligibleRegion]].\n    ",
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "#/definitions/GeoShapeStreamId" },
+        { "$ref": "#/definitions/PlaceStreamId" }
+      ]
+    },
+    "eligibleTransactionVolume": {
+      "description": "The transaction volume, in a monetary unit, for which the offer or price specification is valid, e.g. for indicating a minimal purchasing volume, to express free shipping above a certain order volume, or to limit the acceptance of credit cards to purchases to a certain minimal amount.",
+      "$ref": "#/definitions/PriceSpecificationStreamId"
+    },
+    "gtin": {
+      "description": "A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin)). GTINs identify trade items, including products and services, using numeric identification codes. The [[gtin]] property generalizes the earlier [[gtin8]], [[gtin12]], [[gtin13]], and [[gtin14]] properties. The GS1 [digital link specifications](https://www.gs1.org/standards/Digital-Link/) express GTINs as URLs. A correct [[gtin]] value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a \"GS1 Digital Link\" URL based on such a string. The numeric component should also have a [valid GS1 check digit](https://www.gs1.org/services/check-digit-calculator) and meet the other rules for valid GTINs. See also [GS1's GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) and [Wikipedia](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) for more details. Left-padding of the gtin values is not required or encouraged.\n   ",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "gtin12": {
+      "description": "The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
+      "type": "string"
+    },
+    "gtin13": {
+      "description": "The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
+      "type": "string"
+    },
+    "gtin14": {
+      "description": "The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
+      "type": "string"
+    },
+    "gtin8": {
+      "description": "The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
+      "type": "string"
+    },
+    "hasMeasurement": {
+      "description": "A product measurement, for example the inseam of pants, the wheel size of a bicycle, or the gauge of a screw. Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.",
+      "oneOf": [
+        { "$ref": "#/definitions/QuantitativeValueStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/QuantitativeValueStreamId" }
+        }
+      ]
+    },
+    "hasMerchantReturnPolicy": {
+      "description": "Specifies a MerchantReturnPolicy that may be applicable.",
+      "oneOf": [
+        { "$ref": "#/definitions/MerchantReturnPolicyStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/MerchantReturnPolicyStreamId" }
+        }
+      ]
+    },
+    "includesObject": {
+      "description": "This links to a node or nodes indicating the exact quantity of the products included in  an [[Offer]] or [[ProductCollection]].",
+      "oneOf": [
+        { "$ref": "#/definitions/TypeAndQuantityNodeStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/TypeAndQuantityNodeStreamId" }
+        }
+      ]
+    },
+    "ineligibleRegion": {
+      "description": "The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed.\\n\\nSee also [[eligibleRegion]].\n      ",
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "#/definitions/GeoShapeStreamId" },
+        { "$ref": "#/definitions/PlaceStreamId" }
+      ]
+    },
+    "inventoryLevel": {
+      "description": "The current approximate inventory level for the item or items.",
+      "$ref": "#/definitions/QuantitativeValueStreamId"
+    },
+    "itemCondition": {
+      "description": "A predefined value from OfferItemCondition specifying the condition of the product or service, or the products or services included in the offer. Also used for product return policies to specify the condition of products accepted for returns.",
+      "oneOf": [
+        { "$ref": "#/definitions/OfferItemConditionStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OfferItemConditionStreamId" }
+        }
+      ]
+    },
+    "itemOffered": {
+      "description": "An item being offered (or demanded). The transactional nature of the offer or demand is documented using [[businessFunction]], e.g. sell, lease etc. While several common expected types are listed explicitly in this definition, others can be used. Using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.",
+      "anyOf": [
+        { "$ref": "#/definitions/AggregateOfferStreamId" },
+        { "$ref": "#/definitions/CreativeWorkStreamId" },
+        { "$ref": "#/definitions/EventStreamId" },
+        { "$ref": "#/definitions/MenuItemStreamId" },
+        { "$ref": "#/definitions/ProductStreamId" },
+        { "$ref": "#/definitions/ServiceStreamId" },
+        { "$ref": "#/definitions/TripStreamId" }
+      ]
+    },
+    "leaseLength": {
+      "description": "Length of the lease for some [[Accommodation]], either particular to some [[Offer]] or in some cases intrinsic to the property.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "type": "string", "$comment": "https://schema.org/Duration" },
+            { "$ref": "#/definitions/QuantitativeValueStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "type": "string", "$comment": "https://schema.org/Duration" },
+              { "$ref": "#/definitions/QuantitativeValueStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "mpn": {
+      "description": "The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.",
+      "type": "string"
+    },
+    "offeredBy": {
+      "description": "A pointer to the organization or person making the offer.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            { "$ref": "#/definitions/PersonStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/OrganizationStreamId" },
+              { "$ref": "#/definitions/PersonStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "price": {
+      "description": "The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes.\\n\\nUsage guidelines:\\n\\n* Use the [[priceCurrency]] property (with standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. \"BTC\"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. \"Ithaca HOUR\") instead of including [ambiguous symbols](http://en.wikipedia.org/wiki/Dollar_sign#Currencies_that_use_the_dollar_or_peso_sign) such as '$' in the value.\\n* Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.\\n* Note that both [RDFa](http://www.w3.org/TR/xhtml-rdfa-primer/#using-the-content-attribute) and Microdata syntax allow the use of a \"content=\" attribute for publishing simple machine-readable values alongside more human-friendly formatting.\\n* Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.\n      ",
+      "anyOf": [{ "type": "number" }, { "type": "string" }]
+    },
+    "priceCurrency": {
+      "description": "The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. \"BTC\"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. \"Ithaca HOUR\".",
+      "type": "string"
+    },
+    "priceSpecification": {
+      "description": "One or more detailed price specifications, indicating the unit price and delivery or payment charges.",
+      "oneOf": [
+        { "$ref": "#/definitions/PriceSpecificationStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/PriceSpecificationStreamId" }
+        }
+      ]
+    },
+    "priceValidUntil": {
+      "description": "The date after which the price is no longer available.",
+      "type": "string",
+      "format": "date"
+    },
+    "review": {
+      "description": "A review of the item.",
+      "oneOf": [
+        { "$ref": "#/definitions/ReviewStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/ReviewStreamId" } }
+      ]
+    },
+    "reviews": {
+      "description": "Review of the item.",
+      "oneOf": [
+        { "$ref": "#/definitions/ReviewStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/ReviewStreamId" } }
+      ]
+    },
+    "seller": {
+      "description": "An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.",
+      "anyOf": [
+        { "$ref": "#/definitions/OrganizationStreamId" },
+        { "$ref": "#/definitions/PersonStreamId" }
+      ]
+    },
+    "serialNumber": {
+      "description": "The serial number or any alphanumeric identifier of a particular product. When attached to an offer, it is a shortcut for the serial number of the product included in the offer.",
+      "type": "string"
+    },
+    "shippingDetails": {
+      "description": "Indicates information about the shipping policies and options associated with an [[Offer]].",
+      "oneOf": [
+        { "$ref": "#/definitions/OfferShippingDetailsStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OfferShippingDetailsStreamId" }
+        }
+      ]
+    },
+    "sku": {
+      "description": "The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.",
+      "type": "string"
+    },
+    "validFrom": {
+      "description": "The date when the item becomes valid.",
+      "anyOf": [
+        { "type": "string", "format": "date" },
+        { "type": "string", "format": "date-time" }
+      ]
+    },
+    "validThrough": {
+      "description": "The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.",
+      "anyOf": [
+        { "type": "string", "format": "date" },
+        { "type": "string", "format": "date-time" }
+      ]
+    },
+    "warranty": {
+      "description": "The warranty promise(s) included in the offer.",
+      "$ref": "#/definitions/WarrantyPromiseStreamId"
+    }
+  },
+  "definitions": {
+    "Intangible": {
+      "title": "Intangible",
+      "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of item.",
+          "$ref": "#/definitions/Thing"
+        }
+      ]
+    },
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PropertyValueStreamId" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/CreativeWorkStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/CreativeWorkStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStreamId" }
+            }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/CreativeWorkStreamId" },
+                { "$ref": "#/definitions/EventStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/CreativeWorkStreamId" },
+                  { "$ref": "#/definitions/EventStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "LoanOrCreditStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149laef4cutvbsjcit953zguwvskzpl16hejx3rd345e60qvkxwb"
+    },
+    "PaymentMethodStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145vja3ygmcfigis6hanbkftar085uocj80fb3y5tgz173w984l1"
+    },
+    "OfferStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145c2jnc9g1v15f89uteou91ebt48pdighlctirasnxte9r0o8y7"
+    },
+    "QuantitativeValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apxnix8kswndn6hwtvdh095yubu8fo0unmstgr22iztmcmi85d"
+    },
+    "AggregateRatingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145v3cwrrnkjoacdlkfexs0b4xwc6whza8gnmtuik3ipc49q7bqx"
+    },
+    "AdministrativeAreaStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145ef0jmo9sotumz4319vkhzxa3xbtlqvlmeumd2xhfv7ebay7li"
+    },
+    "GeoShapeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148zivvwdyfe4929mo3z2tcujrl44zicei7dh9ozhxntqrpg2x9y"
+    },
+    "PlaceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bajsbsb34i3zey5pd7km03njsd2d2e4d0jgok9j2803fvk08j9"
+    },
+    "ItemAvailabilityStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bam5pbxl7cah6ek0d9px5pjg41v76riqzsn2box8913nmf0kka"
+    },
+    "DeliveryMethodStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146qf3oru9qulnoj9ejxmpt3tb3ghtywrsv3jbi6krpecbz0ok8s"
+    },
+    "BusinessFunctionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1472wo7hhygpy7asdlltsga0zjpdfu85r6qkbj6x82irxl0s37w1"
+    },
+    "PhysicalActivityCategoryStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14akfk5p5h1r5xk7fboq1wpo29l4oexjk1ezqe0i1lzwanr1lefb"
+    },
+    "ThingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149emvaopzokcdvhlgbxobcl4r8wx5z5ex431t6bvj0sqq8naqup"
+    },
+    "BusinessEntityTypeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bjovf601fzygsxjsjvipidi319ljwt38af3snu6pfbp086xm09"
+    },
+    "PriceSpecificationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148ma4czccjdctta3p7ptxbu4v8p5nlqzzanqmlcse03fczw8bmw"
+    },
+    "MerchantReturnPolicyStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145aedek75otnjxtgj7k0lm9qfh9nc6qjfrslsxpfgp1mcm24im4"
+    },
+    "TypeAndQuantityNodeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149c5bah5wi91s4vialfs3a4mwwcj4g83vd724lglvjahx9iqpnt"
+    },
+    "OfferItemConditionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1474hjhjkn2bb0vemux743uc57cdjo7jqej0kd3kb47mv3tkslfq"
+    },
+    "AggregateOfferStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148oywzbtpbyyhu3w1w8f3selw7e65ljcg7cxd9mx015edymdx5e"
+    },
+    "CreativeWorkStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+    },
+    "EventStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+    },
+    "MenuItemStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147hrgu3hggvhuvzd8w4gve4k1gml25ep31ycjux2r5lml1sq6it"
+    },
+    "ProductStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1475y89ao9j60hp1g1aur4wlkykebmhgjsqc8vcyhwcl9ioiw8ry"
+    },
+    "ServiceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apaxtzw046uiy4u56c12lmh3emlkf0t7b92lmdnq8txtgcb4nr"
+    },
+    "TripStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149hxe147aj6v8g8dt8mbfjd3prqrm87d8ffqvnhx1410ft855j5"
+    },
+    "OrganizationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+    },
+    "PersonStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b0q0zecwbrtioa6v5z20xmbarlw0k18secwsjcezbfu49dhdt"
+    },
+    "ReviewStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b4fc7o72zuq9fdwmlp04s71v0dhi03ie5tt89melm5jstduc8"
+    },
+    "OfferShippingDetailsStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14620et0mfsd2wkeyx4o78hs1gj1kz9oklkz12j834ja6th0b7vk"
+    },
+    "WarrantyPromiseStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148pjcfc1lzditu71d3gnmy08810bo8hv5v6ahe2vvuyxbaimutf"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "ImageObjectStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+    },
+    "ActionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+    }
+  }
+}

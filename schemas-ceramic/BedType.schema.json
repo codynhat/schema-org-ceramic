@@ -1,0 +1,160 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BedType",
+  "description": "A type of bed. This is used for indicating the bed or beds available in an accommodation.",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "A predefined value for a product characteristic, e.g. the power cord plug type 'US' or the garment sizes 'S', 'M', 'L', and 'XL'.",
+      "$ref": "#/definitions/QualitativeValue"
+    }
+  ],
+  "definitions": {
+    "QualitativeValue": {
+      "title": "QualitativeValue",
+      "description": "A predefined value for a product characteristic, e.g. the power cord plug type 'US' or the garment sizes 'S', 'M', 'L', and 'XL'.",
+      "type": "object",
+      "properties": {
+        "additionalProperty": {
+          "description": "A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\\n\\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.\n",
+          "oneOf": [
+            { "$ref": "#/definitions/PropertyValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/PropertyValueStreamId" }
+            }
+          ]
+        },
+        "equal": {
+          "description": "This ordering relation for qualitative values indicates that the subject is equal to the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "greater": {
+          "description": "This ordering relation for qualitative values indicates that the subject is greater than the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "greaterOrEqual": {
+          "description": "This ordering relation for qualitative values indicates that the subject is greater than or equal to the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "lesser": {
+          "description": "This ordering relation for qualitative values indicates that the subject is lesser than the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "lesserOrEqual": {
+          "description": "This ordering relation for qualitative values indicates that the subject is lesser than or equal to the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "nonEqual": {
+          "description": "This ordering relation for qualitative values indicates that the subject is not equal to the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "valueReference": {
+          "description": "A secondary value that provides additional information on the original value, e.g. a reference temperature or a type of measurement.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string" },
+                { "$ref": "#/definitions/DefinedTermStreamId" },
+                { "$ref": "#/definitions/EnumerationStreamId" },
+                { "$ref": "#/definitions/MeasurementTypeEnumerationStreamId" },
+                { "$ref": "#/definitions/PropertyValueStreamId" },
+                { "$ref": "#/definitions/QualitativeValueStreamId" },
+                { "$ref": "#/definitions/QuantitativeValueStreamId" },
+                { "$ref": "#/definitions/StructuredValueStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  { "$ref": "#/definitions/DefinedTermStreamId" },
+                  { "$ref": "#/definitions/EnumerationStreamId" },
+                  {
+                    "$ref": "#/definitions/MeasurementTypeEnumerationStreamId"
+                  },
+                  { "$ref": "#/definitions/PropertyValueStreamId" },
+                  { "$ref": "#/definitions/QualitativeValueStreamId" },
+                  { "$ref": "#/definitions/QuantitativeValueStreamId" },
+                  { "$ref": "#/definitions/StructuredValueStreamId" }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "QualitativeValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145s07jdrjthn4rj38skywzp24u6uzw4q03w7i20glmgrj107jaw"
+    },
+    "DefinedTermStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a0z1mgs4luwb7ngdgmbwscgwruwx9vkcjr067sj1bs5yso1vmh"
+    },
+    "EnumerationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147r1obnvi3wsic6e6mlss5yefi1qb3oqg7xcw8v3wiyudtkif04"
+    },
+    "MeasurementTypeEnumerationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149usqt2xw2il88jncmz2pvn0lvom3o8yf70d2dl8icuswe0wsa5"
+    },
+    "QuantitativeValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apxnix8kswndn6hwtvdh095yubu8fo0unmstgr22iztmcmi85d"
+    },
+    "StructuredValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146zjnipc5khflth4ye71gw0ah5nf9sywc8flyx8kp3qmiz1sslr"
+    }
+  }
+}

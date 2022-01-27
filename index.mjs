@@ -84,8 +84,12 @@ async function replaceSchemaReferences(ceramic, manager, schema, mainSchema) {
 
 export async function createModel(ceramic, manager, className) {
   const schema = require(`./schemas/${className}.schema.json`);
-  let schemaId = await manager.createSchema(className, schema);
-  console.log(`Created schema ${className} -> ${schemaId}`);
+
+  let schemaId = manager.getSchemaID(className);
+  if (!schemaId) {
+    schemaId = await manager.createSchema(className, schema);
+    console.log(`Created schema ${className} -> ${schemaId}`);
+  }
 
   await replaceSchemaReferences(ceramic, manager, schema);
 

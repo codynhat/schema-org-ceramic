@@ -1,0 +1,636 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Festival",
+  "description": "Event type: Festival.",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the [[offers]] property. Repeated events may be structured as separate Event objects.",
+      "$ref": "#/definitions/Event"
+    }
+  ],
+  "definitions": {
+    "Event": {
+      "title": "Event",
+      "description": "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the [[offers]] property. Repeated events may be structured as separate Event objects.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of item.",
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "properties": {
+        "about": {
+          "description": "The subject matter of the content.",
+          "$ref": "#/definitions/ThingStreamId"
+        },
+        "actor": {
+          "description": "An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.",
+          "oneOf": [
+            { "$ref": "#/definitions/PersonStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/PersonStreamId" }
+            }
+          ]
+        },
+        "aggregateRating": {
+          "description": "The overall rating, based on a collection of reviews or ratings, of the item.",
+          "$ref": "#/definitions/AggregateRatingStreamId"
+        },
+        "attendee": {
+          "description": "A person or organization attending the event.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "attendees": {
+          "description": "A person attending the event.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "audience": {
+          "description": "An intended audience, i.e. a group for whom something was created.",
+          "$ref": "#/definitions/AudienceStreamId"
+        },
+        "composer": {
+          "description": "The person or organization who wrote a composition, or who is the composer of a work performed at some event.",
+          "anyOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            { "$ref": "#/definitions/PersonStreamId" }
+          ]
+        },
+        "contributor": {
+          "description": "A secondary contributor to the CreativeWork or Event.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "director": {
+          "description": "A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.",
+          "$ref": "#/definitions/PersonStreamId"
+        },
+        "doorTime": {
+          "description": "The time admission will commence.",
+          "anyOf": [
+            { "type": "string", "format": "date-time" },
+            { "type": "string", "format": "time" }
+          ]
+        },
+        "duration": {
+          "description": "The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).",
+          "type": "string",
+          "$comment": "https://schema.org/Duration"
+        },
+        "endDate": {
+          "description": "The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).",
+          "anyOf": [
+            { "type": "string", "format": "date" },
+            { "type": "string", "format": "date-time" }
+          ]
+        },
+        "eventAttendanceMode": {
+          "description": "The eventAttendanceMode of an event indicates whether it occurs online, offline, or a mix.",
+          "$ref": "#/definitions/EventAttendanceModeEnumerationStreamId"
+        },
+        "eventSchedule": {
+          "description": "Associates an [[Event]] with a [[Schedule]]. There are circumstances where it is preferable to share a schedule for a series of\n      repeating events rather than data on the individual events themselves. For example, a website or application might prefer to publish a schedule for a weekly\n      gym class rather than provide data on every event. A schedule could be processed by applications to add forthcoming events to a calendar. An [[Event]] that\n      is associated with a [[Schedule]] using this property should not have [[startDate]] or [[endDate]] properties. These are instead defined within the associated\n      [[Schedule]], this avoids any ambiguity for clients using the data. The property might have repeated values to specify different schedules, e.g. for different months\n      or seasons.",
+          "oneOf": [
+            { "$ref": "#/definitions/ScheduleStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ScheduleStreamId" }
+            }
+          ]
+        },
+        "eventStatus": {
+          "description": "An eventStatus of an event represents its status; particularly useful when an event is cancelled or rescheduled.",
+          "oneOf": [
+            { "$ref": "#/definitions/EventStatusTypeStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/EventStatusTypeStreamId" }
+            }
+          ]
+        },
+        "funder": {
+          "description": "A person or organization that supports (sponsors) something through some kind of financial contribution.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "inLanguage": {
+          "description": "The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/LanguageStreamId" }
+          ]
+        },
+        "isAccessibleForFree": {
+          "description": "A flag to signal that the item, event, or place is accessible for free.",
+          "type": "boolean"
+        },
+        "location": {
+          "description": "The location of, for example, where an event is happening, where an organization is located, or where an action takes place.",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/PlaceStreamId" },
+            { "$ref": "#/definitions/PostalAddressStreamId" },
+            { "$ref": "#/definitions/VirtualLocationStreamId" }
+          ]
+        },
+        "maximumAttendeeCapacity": {
+          "description": "The total number of individuals that may attend an event or venue.",
+          "type": "integer"
+        },
+        "maximumPhysicalAttendeeCapacity": {
+          "description": "The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]] is [[OfflineEventAttendanceMode]] (or the offline aspects, in the case of a [[MixedEventAttendanceMode]]). ",
+          "type": "integer"
+        },
+        "maximumVirtualAttendeeCapacity": {
+          "description": "The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]] is [[OnlineEventAttendanceMode]] (or the online aspects, in the case of a [[MixedEventAttendanceMode]]). ",
+          "type": "integer"
+        },
+        "offers": {
+          "description": "An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.\n      ",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/DemandStreamId" },
+                { "$ref": "#/definitions/OfferStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/DemandStreamId" },
+                  { "$ref": "#/definitions/OfferStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "organizer": {
+          "description": "An organizer of an Event.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "performer": {
+          "description": "A performer at the event—for example, a presenter, musician, musical group or actor.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "performers": {
+          "description": "The main performer or performers of the event—for example, a presenter, musician, or actor.",
+          "anyOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            { "$ref": "#/definitions/PersonStreamId" }
+          ]
+        },
+        "previousStartDate": {
+          "description": "Used in conjunction with eventStatus for rescheduled or cancelled events. This property contains the previously scheduled start date. For rescheduled events, the startDate property should be used for the newly scheduled start date. In the (rare) case of an event that has been postponed and rescheduled multiple times, this field may be repeated.",
+          "oneOf": [
+            { "type": "string", "format": "date" },
+            { "type": "array", "items": { "type": "string", "format": "date" } }
+          ]
+        },
+        "recordedIn": {
+          "description": "The CreativeWork that captured all or part of this Event.",
+          "$ref": "#/definitions/CreativeWorkStreamId"
+        },
+        "remainingAttendeeCapacity": {
+          "description": "The number of attendee places for an event that remain unallocated.",
+          "type": "integer"
+        },
+        "review": {
+          "description": "A review of the item.",
+          "oneOf": [
+            { "$ref": "#/definitions/ReviewStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ReviewStreamId" }
+            }
+          ]
+        },
+        "sponsor": {
+          "description": "A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "startDate": {
+          "description": "The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).",
+          "anyOf": [
+            { "type": "string", "format": "date" },
+            { "type": "string", "format": "date-time" }
+          ]
+        },
+        "subEvent": {
+          "description": "An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.",
+          "oneOf": [
+            { "$ref": "#/definitions/EventStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/EventStreamId" }
+            }
+          ]
+        },
+        "subEvents": {
+          "description": "Events that are a part of this event. For example, a conference event includes many presentations, each subEvents of the conference.",
+          "oneOf": [
+            { "$ref": "#/definitions/EventStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/EventStreamId" }
+            }
+          ]
+        },
+        "superEvent": {
+          "description": "An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.",
+          "oneOf": [
+            { "$ref": "#/definitions/EventStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/EventStreamId" }
+            }
+          ]
+        },
+        "translator": {
+          "description": "Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "typicalAgeRange": {
+          "description": "The typical expected age range, e.g. '7-9', '11-'.",
+          "type": "string"
+        },
+        "workFeatured": {
+          "description": "A work featured in some event, e.g. exhibited in an ExhibitionEvent.\n       Specific subproperties are available for workPerformed (e.g. a play), or a workPresented (a Movie at a ScreeningEvent).",
+          "oneOf": [
+            { "$ref": "#/definitions/CreativeWorkStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/CreativeWorkStreamId" }
+            }
+          ]
+        },
+        "workPerformed": {
+          "description": "A work performed in some event, for example a play performed in a TheaterEvent.",
+          "oneOf": [
+            { "$ref": "#/definitions/CreativeWorkStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/CreativeWorkStreamId" }
+            }
+          ]
+        }
+      }
+    },
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PropertyValueStreamId" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/CreativeWorkStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/CreativeWorkStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStreamId" }
+            }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/CreativeWorkStreamId" },
+                { "$ref": "#/definitions/EventStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/CreativeWorkStreamId" },
+                  { "$ref": "#/definitions/EventStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "ThingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149emvaopzokcdvhlgbxobcl4r8wx5z5ex431t6bvj0sqq8naqup"
+    },
+    "PersonStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b0q0zecwbrtioa6v5z20xmbarlw0k18secwsjcezbfu49dhdt"
+    },
+    "AggregateRatingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145v3cwrrnkjoacdlkfexs0b4xwc6whza8gnmtuik3ipc49q7bqx"
+    },
+    "OrganizationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+    },
+    "AudienceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149jn3ma83ukeccidzrttzrtyk1wi2ev9wi7yhvqjdtbzsn0wtor"
+    },
+    "EventAttendanceModeEnumerationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146rwtv4yb3jrv03jof4xyurizfgvfcks71s6eorpet7z0oj6qgg"
+    },
+    "ScheduleStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149s2qttkcsyt2o0u6w24yp4prv16ng4tj68hm5r2py1mdvnvvs7"
+    },
+    "EventStatusTypeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149tbqzvlbqiq0od8rhcd9ngggl7fgq1k2nm4a0gpe46sf60rgxs"
+    },
+    "LanguageStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149yc3w2opfo5a6dzl7pul9773s0w87p57qcvpozj1v3xes0wu2z"
+    },
+    "PlaceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bajsbsb34i3zey5pd7km03njsd2d2e4d0jgok9j2803fvk08j9"
+    },
+    "PostalAddressStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a4brivqraxql3nu7w003p0qb33jnlas5zuiuue6bfcokyl48l6"
+    },
+    "VirtualLocationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14auw1sosj3txwawjxda1laucjhba9fu16254g9uln3d0jsujy6f"
+    },
+    "DemandStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ay12pnpo2n26694j0tt5fzm1v21tkhunaarmm1szn0m2ap5e03"
+    },
+    "OfferStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145c2jnc9g1v15f89uteou91ebt48pdighlctirasnxte9r0o8y7"
+    },
+    "CreativeWorkStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+    },
+    "ReviewStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b4fc7o72zuq9fdwmlp04s71v0dhi03ie5tt89melm5jstduc8"
+    },
+    "EventStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "ImageObjectStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+    },
+    "ActionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+    }
+  }
+}

@@ -1,0 +1,817 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Person",
+  "description": "A person (alive, dead, undead, or fictional).",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "The most generic type of item.",
+      "$ref": "#/definitions/Thing"
+    }
+  ],
+  "properties": {
+    "additionalName": {
+      "description": "An additional name for a Person, can be used for a middle name.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "address": {
+      "description": "Physical address of the item.",
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "#/definitions/PostalAddressStreamId" }
+      ]
+    },
+    "affiliation": {
+      "description": "An organization that this person is affiliated with. For example, a school/university, a club, or a team.",
+      "oneOf": [
+        { "$ref": "#/definitions/OrganizationStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OrganizationStreamId" }
+        }
+      ]
+    },
+    "alumniOf": {
+      "description": "An organization that the person is an alumni of.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/EducationalOrganizationStreamId" },
+            { "$ref": "#/definitions/OrganizationStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/EducationalOrganizationStreamId" },
+              { "$ref": "#/definitions/OrganizationStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "award": {
+      "description": "An award won by or for this item.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "awards": {
+      "description": "Awards won by or for this item.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "birthDate": {
+      "description": "Date of birth.",
+      "type": "string",
+      "format": "date"
+    },
+    "birthPlace": {
+      "description": "The place where the person was born.",
+      "$ref": "#/definitions/PlaceStreamId"
+    },
+    "brand": {
+      "description": "The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.",
+      "anyOf": [
+        { "$ref": "#/definitions/BrandStreamId" },
+        { "$ref": "#/definitions/OrganizationStreamId" }
+      ]
+    },
+    "callSign": {
+      "description": "A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "children": {
+      "description": "A child of the person.",
+      "oneOf": [
+        { "$ref": "#/definitions/PersonStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/PersonStreamId" } }
+      ]
+    },
+    "colleague": {
+      "description": "A colleague of the person.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "$ref": "#/definitions/PersonStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "type": "string", "format": "uri" },
+              { "$ref": "#/definitions/PersonStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "colleagues": {
+      "description": "A colleague of the person.",
+      "oneOf": [
+        { "$ref": "#/definitions/PersonStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/PersonStreamId" } }
+      ]
+    },
+    "contactPoint": {
+      "description": "A contact point for a person or organization.",
+      "oneOf": [
+        { "$ref": "#/definitions/ContactPointStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ContactPointStreamId" }
+        }
+      ]
+    },
+    "contactPoints": {
+      "description": "A contact point for a person or organization.",
+      "oneOf": [
+        { "$ref": "#/definitions/ContactPointStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ContactPointStreamId" }
+        }
+      ]
+    },
+    "deathDate": {
+      "description": "Date of death.",
+      "type": "string",
+      "format": "date"
+    },
+    "deathPlace": {
+      "description": "The place where the person died.",
+      "$ref": "#/definitions/PlaceStreamId"
+    },
+    "duns": {
+      "description": "The Dun & Bradstreet DUNS number for identifying an organization or business person.",
+      "type": "string"
+    },
+    "email": {
+      "description": "Email address.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "familyName": {
+      "description": "Family name. In the U.S., the last name of a Person.",
+      "type": "string"
+    },
+    "faxNumber": { "description": "The fax number.", "type": "string" },
+    "follows": {
+      "description": "The most generic uni-directional social relation.",
+      "oneOf": [
+        { "$ref": "#/definitions/PersonStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/PersonStreamId" } }
+      ]
+    },
+    "funder": {
+      "description": "A person or organization that supports (sponsors) something through some kind of financial contribution.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            { "$ref": "#/definitions/PersonStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/OrganizationStreamId" },
+              { "$ref": "#/definitions/PersonStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "gender": {
+      "description": "Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While https://schema.org/Male and https://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of \"Mixed\".",
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "#/definitions/GenderTypeStreamId" }
+      ]
+    },
+    "givenName": {
+      "description": "Given name. In the U.S., the first name of a Person.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "globalLocationNumber": {
+      "description": "The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.",
+      "type": "string"
+    },
+    "hasCredential": {
+      "description": "A credential awarded to the Person or Organization.",
+      "oneOf": [
+        { "$ref": "#/definitions/EducationalOccupationalCredentialStreamId" },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EducationalOccupationalCredentialStreamId"
+          }
+        }
+      ]
+    },
+    "hasOccupation": {
+      "description": "The Person's occupation. For past professions, use Role for expressing dates.",
+      "$ref": "#/definitions/OccupationStreamId"
+    },
+    "hasOfferCatalog": {
+      "description": "Indicates an OfferCatalog listing for this Organization, Person, or Service.",
+      "oneOf": [
+        { "$ref": "#/definitions/OfferCatalogStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OfferCatalogStreamId" }
+        }
+      ]
+    },
+    "hasPOS": {
+      "description": "Points-of-Sales operated by the organization or person.",
+      "oneOf": [
+        { "$ref": "#/definitions/PlaceStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/PlaceStreamId" } }
+      ]
+    },
+    "height": {
+      "description": "The height of the item.",
+      "anyOf": [
+        { "type": "string", "$comment": "https://schema.org/Distance" },
+        { "$ref": "#/definitions/QuantitativeValueStreamId" }
+      ]
+    },
+    "homeLocation": {
+      "description": "A contact location for a person's residence.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/ContactPointStreamId" },
+            { "$ref": "#/definitions/PlaceStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/ContactPointStreamId" },
+              { "$ref": "#/definitions/PlaceStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "honorificPrefix": {
+      "description": "An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "honorificSuffix": {
+      "description": "An honorific suffix following a Person's name such as M.D. /PhD/MSCSW.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "interactionStatistic": {
+      "description": "The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used.",
+      "$ref": "#/definitions/InteractionCounterStreamId"
+    },
+    "isicV4": {
+      "description": "The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.",
+      "type": "string"
+    },
+    "jobTitle": {
+      "description": "The job title of the person (for example, Financial Manager).",
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "#/definitions/DefinedTermStreamId" }
+      ]
+    },
+    "knows": {
+      "description": "The most generic bi-directional social/work relation.",
+      "$ref": "#/definitions/PersonStreamId"
+    },
+    "knowsAbout": {
+      "description": "Of a [[Person]], and less typically of an [[Organization]], to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or relate this to educational content, events, objectives or [[JobPosting]] descriptions.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/ThingStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "type": "string", "format": "uri" },
+              { "type": "string" },
+              { "$ref": "#/definitions/ThingStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "knowsLanguage": {
+      "description": "Of a [[Person]], and less typically of an [[Organization]], to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/LanguageStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "type": "string" },
+              { "$ref": "#/definitions/LanguageStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "makesOffer": {
+      "description": "A pointer to products or services offered by the organization or person.",
+      "oneOf": [
+        { "$ref": "#/definitions/OfferStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/OfferStreamId" } }
+      ]
+    },
+    "memberOf": {
+      "description": "An Organization (or ProgramMembership) to which this Person or Organization belongs.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            { "$ref": "#/definitions/ProgramMembershipStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/OrganizationStreamId" },
+              { "$ref": "#/definitions/ProgramMembershipStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "naics": {
+      "description": "The North American Industry Classification System (NAICS) code for a particular organization or business person.",
+      "type": "string"
+    },
+    "nationality": {
+      "description": "Nationality of the person.",
+      "oneOf": [
+        { "$ref": "#/definitions/CountryStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/CountryStreamId" }
+        }
+      ]
+    },
+    "netWorth": {
+      "description": "The total financial value of the person as calculated by subtracting assets from liabilities.",
+      "anyOf": [
+        { "$ref": "#/definitions/MonetaryAmountStreamId" },
+        { "$ref": "#/definitions/PriceSpecificationStreamId" }
+      ]
+    },
+    "owns": {
+      "description": "Products owned by the organization or person.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/OwnershipInfoStreamId" },
+            { "$ref": "#/definitions/ProductStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/OwnershipInfoStreamId" },
+              { "$ref": "#/definitions/ProductStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "parent": {
+      "description": "A parent of this person.",
+      "oneOf": [
+        { "$ref": "#/definitions/PersonStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/PersonStreamId" } }
+      ]
+    },
+    "parents": {
+      "description": "A parents of the person.",
+      "oneOf": [
+        { "$ref": "#/definitions/PersonStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/PersonStreamId" } }
+      ]
+    },
+    "performerIn": {
+      "description": "Event that this person is a performer or participant in.",
+      "oneOf": [
+        { "$ref": "#/definitions/EventStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/EventStreamId" } }
+      ]
+    },
+    "publishingPrinciples": {
+      "description": "The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].\n\nWhile such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.\n",
+      "anyOf": [
+        { "type": "string", "format": "uri" },
+        { "$ref": "#/definitions/CreativeWorkStreamId" }
+      ]
+    },
+    "relatedTo": {
+      "description": "The most generic familial relation.",
+      "$ref": "#/definitions/PersonStreamId"
+    },
+    "seeks": {
+      "description": "A pointer to products or services sought by the organization or person (demand).",
+      "oneOf": [
+        { "$ref": "#/definitions/DemandStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/DemandStreamId" } }
+      ]
+    },
+    "sibling": {
+      "description": "A sibling of the person.",
+      "oneOf": [
+        { "$ref": "#/definitions/PersonStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/PersonStreamId" } }
+      ]
+    },
+    "siblings": {
+      "description": "A sibling of the person.",
+      "oneOf": [
+        { "$ref": "#/definitions/PersonStreamId" },
+        { "type": "array", "items": { "$ref": "#/definitions/PersonStreamId" } }
+      ]
+    },
+    "sponsor": {
+      "description": "A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            { "$ref": "#/definitions/PersonStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/OrganizationStreamId" },
+              { "$ref": "#/definitions/PersonStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "spouse": {
+      "description": "The person's spouse.",
+      "$ref": "#/definitions/PersonStreamId"
+    },
+    "taxID": {
+      "description": "The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.",
+      "type": "string"
+    },
+    "telephone": { "description": "The telephone number.", "type": "string" },
+    "vatID": {
+      "description": "The Value-added Tax ID of the organization or person.",
+      "type": "string"
+    },
+    "weight": {
+      "description": "The weight of the product or person.",
+      "$ref": "#/definitions/QuantitativeValueStreamId"
+    },
+    "workLocation": {
+      "description": "A contact location for a person's place of work.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/ContactPointStreamId" },
+            { "$ref": "#/definitions/PlaceStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/ContactPointStreamId" },
+              { "$ref": "#/definitions/PlaceStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "worksFor": {
+      "description": "Organizations that the person works for.",
+      "oneOf": [
+        { "$ref": "#/definitions/OrganizationStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OrganizationStreamId" }
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PropertyValueStreamId" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/CreativeWorkStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/CreativeWorkStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStreamId" }
+            }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/CreativeWorkStreamId" },
+                { "$ref": "#/definitions/EventStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/CreativeWorkStreamId" },
+                  { "$ref": "#/definitions/EventStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "PostalAddressStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a4brivqraxql3nu7w003p0qb33jnlas5zuiuue6bfcokyl48l6"
+    },
+    "OrganizationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+    },
+    "EducationalOrganizationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1472pmxyr3ruoqfymlteda6oz3u9taoc05n85caln6rfr0nez031"
+    },
+    "PlaceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bajsbsb34i3zey5pd7km03njsd2d2e4d0jgok9j2803fvk08j9"
+    },
+    "BrandStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148zhy7x7m0bhxpmvp6p3jhzji96lkd9ff42jonm08uuzio2fr1r"
+    },
+    "PersonStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b0q0zecwbrtioa6v5z20xmbarlw0k18secwsjcezbfu49dhdt"
+    },
+    "ContactPointStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148pnozh7ylmvgg4vvrmvmlhp808hw701sctyab4shs4148hfwax"
+    },
+    "GenderTypeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149rjxub754yup2kl4ig1ohz3qxwq2lsipuvmy4ce60gr7sjq8a6"
+    },
+    "EducationalOccupationalCredentialStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148is2ft5v85z14733u4u5dciz4vadhi8hhgdj6vt9hk88g5s49m"
+    },
+    "OccupationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148sk1trwss1gv3hldgq712kdq35jvgwoev5qp05bii1lsv7mxn8"
+    },
+    "OfferCatalogStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14azcxc04n6i2vwscxqahuq2m3xoslir0txfbtagi6rnebt3rag2"
+    },
+    "QuantitativeValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apxnix8kswndn6hwtvdh095yubu8fo0unmstgr22iztmcmi85d"
+    },
+    "InteractionCounterStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14amy551285jhwemiftqpqzl7deoy0pcnh64nw2lkmfgxad5af14"
+    },
+    "DefinedTermStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a0z1mgs4luwb7ngdgmbwscgwruwx9vkcjr067sj1bs5yso1vmh"
+    },
+    "ThingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149emvaopzokcdvhlgbxobcl4r8wx5z5ex431t6bvj0sqq8naqup"
+    },
+    "LanguageStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149yc3w2opfo5a6dzl7pul9773s0w87p57qcvpozj1v3xes0wu2z"
+    },
+    "OfferStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145c2jnc9g1v15f89uteou91ebt48pdighlctirasnxte9r0o8y7"
+    },
+    "ProgramMembershipStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147ecf71fg01fqjbxjhhu01o2bdlpc4eapcm6h3328fmwe8u4luq"
+    },
+    "CountryStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14an9hnvnxx9nhxl4q6axk1zu61o8my4wq8m91bdhb38x3tahww7"
+    },
+    "MonetaryAmountStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14at9lwb418r4g5wkqfzggjhclv15ea25dz0lh1f8xwb55lwowti"
+    },
+    "PriceSpecificationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148ma4czccjdctta3p7ptxbu4v8p5nlqzzanqmlcse03fczw8bmw"
+    },
+    "OwnershipInfoStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148v4mjy34wns733l51yagzlwl26kj1l04o7z2vul3rjx93tdlzw"
+    },
+    "ProductStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1475y89ao9j60hp1g1aur4wlkykebmhgjsqc8vcyhwcl9ioiw8ry"
+    },
+    "EventStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+    },
+    "CreativeWorkStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+    },
+    "DemandStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ay12pnpo2n26694j0tt5fzm1v21tkhunaarmm1szn0m2ap5e03"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "ImageObjectStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+    },
+    "ActionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+    }
+  }
+}

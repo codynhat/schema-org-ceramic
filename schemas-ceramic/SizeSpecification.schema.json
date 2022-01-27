@@ -1,0 +1,222 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SizeSpecification",
+  "description": "Size related properties of a product, typically a size code ([[name]]) and optionally a [[sizeSystem]], [[sizeGroup]], and product measurements ([[hasMeasurement]]). In addition, the intended audience can be defined through [[suggestedAge]], [[suggestedGender]], and suggested body measurements ([[suggestedMeasurement]]).",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "A predefined value for a product characteristic, e.g. the power cord plug type 'US' or the garment sizes 'S', 'M', 'L', and 'XL'.",
+      "$ref": "#/definitions/QualitativeValue"
+    }
+  ],
+  "properties": {
+    "hasMeasurement": {
+      "description": "A product measurement, for example the inseam of pants, the wheel size of a bicycle, or the gauge of a screw. Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.",
+      "oneOf": [
+        { "$ref": "#/definitions/QuantitativeValueStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/QuantitativeValueStreamId" }
+        }
+      ]
+    },
+    "sizeGroup": {
+      "description": "The size group (also known as \"size type\") for a product's size. Size groups are common in the fashion industry to define size segments and suggested audiences for wearable products. Multiple values can be combined, for example \"men's big and tall\", \"petite maternity\" or \"regular\"",
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "#/definitions/SizeGroupEnumerationStreamId" }
+      ]
+    },
+    "sizeSystem": {
+      "description": "The size system used to identify a product's size. Typically either a standard (for example, \"GS1\" or \"ISO-EN13402\"), country code (for example \"US\" or \"JP\"), or a measuring system (for example \"Metric\" or \"Imperial\").",
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "#/definitions/SizeSystemEnumerationStreamId" }
+      ]
+    },
+    "suggestedAge": {
+      "description": "The age or age range for the intended audience or person, for example 3-12 months for infants, 1-5 years for toddlers.",
+      "$ref": "#/definitions/QuantitativeValueStreamId"
+    },
+    "suggestedGender": {
+      "description": "The suggested gender of the intended person or audience, for example \"male\", \"female\", or \"unisex\".",
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "#/definitions/GenderTypeStreamId" }
+      ]
+    },
+    "suggestedMeasurement": {
+      "description": "A suggested range of body measurements for the intended audience or person, for example inseam between 32 and 34 inches or height between 170 and 190 cm. Typically found on a size chart for wearable products.",
+      "oneOf": [
+        { "$ref": "#/definitions/QuantitativeValueStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/QuantitativeValueStreamId" }
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "QualitativeValue": {
+      "title": "QualitativeValue",
+      "description": "A predefined value for a product characteristic, e.g. the power cord plug type 'US' or the garment sizes 'S', 'M', 'L', and 'XL'.",
+      "type": "object",
+      "properties": {
+        "additionalProperty": {
+          "description": "A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\\n\\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.\n",
+          "oneOf": [
+            { "$ref": "#/definitions/PropertyValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/PropertyValueStreamId" }
+            }
+          ]
+        },
+        "equal": {
+          "description": "This ordering relation for qualitative values indicates that the subject is equal to the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "greater": {
+          "description": "This ordering relation for qualitative values indicates that the subject is greater than the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "greaterOrEqual": {
+          "description": "This ordering relation for qualitative values indicates that the subject is greater than or equal to the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "lesser": {
+          "description": "This ordering relation for qualitative values indicates that the subject is lesser than the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "lesserOrEqual": {
+          "description": "This ordering relation for qualitative values indicates that the subject is lesser than or equal to the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "nonEqual": {
+          "description": "This ordering relation for qualitative values indicates that the subject is not equal to the object.",
+          "oneOf": [
+            { "$ref": "#/definitions/QualitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QualitativeValueStreamId" }
+            }
+          ]
+        },
+        "valueReference": {
+          "description": "A secondary value that provides additional information on the original value, e.g. a reference temperature or a type of measurement.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string" },
+                { "$ref": "#/definitions/DefinedTermStreamId" },
+                { "$ref": "#/definitions/EnumerationStreamId" },
+                { "$ref": "#/definitions/MeasurementTypeEnumerationStreamId" },
+                { "$ref": "#/definitions/PropertyValueStreamId" },
+                { "$ref": "#/definitions/QualitativeValueStreamId" },
+                { "$ref": "#/definitions/QuantitativeValueStreamId" },
+                { "$ref": "#/definitions/StructuredValueStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  { "$ref": "#/definitions/DefinedTermStreamId" },
+                  { "$ref": "#/definitions/EnumerationStreamId" },
+                  {
+                    "$ref": "#/definitions/MeasurementTypeEnumerationStreamId"
+                  },
+                  { "$ref": "#/definitions/PropertyValueStreamId" },
+                  { "$ref": "#/definitions/QualitativeValueStreamId" },
+                  { "$ref": "#/definitions/QuantitativeValueStreamId" },
+                  { "$ref": "#/definitions/StructuredValueStreamId" }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "QuantitativeValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apxnix8kswndn6hwtvdh095yubu8fo0unmstgr22iztmcmi85d"
+    },
+    "SizeGroupEnumerationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bc7c85tqo95utbe4bva197wpzpf2ev3uglooaozbqtr4h19ipz"
+    },
+    "SizeSystemEnumerationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ammkojt75z6u0l298jlz9qen4bm1b04zdl7b7cu1az4eg3kei6"
+    },
+    "GenderTypeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149rjxub754yup2kl4ig1ohz3qxwq2lsipuvmy4ce60gr7sjq8a6"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "QualitativeValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145s07jdrjthn4rj38skywzp24u6uzw4q03w7i20glmgrj107jaw"
+    },
+    "DefinedTermStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a0z1mgs4luwb7ngdgmbwscgwruwx9vkcjr067sj1bs5yso1vmh"
+    },
+    "EnumerationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147r1obnvi3wsic6e6mlss5yefi1qb3oqg7xcw8v3wiyudtkif04"
+    },
+    "MeasurementTypeEnumerationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149usqt2xw2il88jncmz2pvn0lvom3o8yf70d2dl8icuswe0wsa5"
+    },
+    "StructuredValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146zjnipc5khflth4ye71gw0ah5nf9sywc8flyx8kp3qmiz1sslr"
+    }
+  }
+}

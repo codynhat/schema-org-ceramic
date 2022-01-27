@@ -1,0 +1,641 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RadioBroadcastService",
+  "description": "A delivery service through which radio content is provided via broadcast over the air or online.",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "A delivery service through which content is provided via broadcast over the air or online.",
+      "$ref": "#/definitions/BroadcastService"
+    }
+  ],
+  "definitions": {
+    "BroadcastService": {
+      "title": "BroadcastService",
+      "description": "A delivery service through which content is provided via broadcast over the air or online.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "A service provided by an organization, e.g. delivery service, print services, etc.",
+          "$ref": "#/definitions/Service"
+        }
+      ],
+      "properties": {
+        "area": {
+          "description": "The area within which users can expect to reach the broadcast service.",
+          "$ref": "#/definitions/PlaceStreamId"
+        },
+        "broadcastAffiliateOf": {
+          "description": "The media network(s) whose content is broadcast on this station.",
+          "$ref": "#/definitions/OrganizationStreamId"
+        },
+        "broadcastDisplayName": {
+          "description": "The name displayed in the channel guide. For many US affiliates, it is the network name.",
+          "type": "string"
+        },
+        "broadcastFrequency": {
+          "description": "The frequency used for over-the-air broadcasts. Numeric values or simple ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences of AM and FM radio channels, e.g. \"87 FM\".",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/BroadcastFrequencySpecificationStreamId" }
+          ]
+        },
+        "broadcastTimezone": {
+          "description": "The timezone in [ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601) for which the service bases its broadcasts",
+          "type": "string"
+        },
+        "broadcaster": {
+          "description": "The organization owning or operating the broadcast service.",
+          "$ref": "#/definitions/OrganizationStreamId"
+        },
+        "callSign": {
+          "description": "A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "hasBroadcastChannel": {
+          "description": "A broadcast channel of a broadcast service.",
+          "oneOf": [
+            { "$ref": "#/definitions/BroadcastChannelStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/BroadcastChannelStreamId" }
+            }
+          ]
+        },
+        "inLanguage": {
+          "description": "The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/LanguageStreamId" }
+          ]
+        },
+        "parentService": {
+          "description": "A broadcast service to which the broadcast service may belong to such as regional variations of a national channel.",
+          "oneOf": [
+            { "$ref": "#/definitions/BroadcastServiceStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/BroadcastServiceStreamId" }
+            }
+          ]
+        },
+        "videoFormat": {
+          "description": "The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).",
+          "type": "string"
+        }
+      }
+    },
+    "Service": {
+      "title": "Service",
+      "description": "A service provided by an organization, e.g. delivery service, print services, etc.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+          "$ref": "#/definitions/Intangible"
+        }
+      ],
+      "properties": {
+        "aggregateRating": {
+          "description": "The overall rating, based on a collection of reviews or ratings, of the item.",
+          "$ref": "#/definitions/AggregateRatingStreamId"
+        },
+        "areaServed": {
+          "description": "The geographic area where a service or offered item is provided.",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/AdministrativeAreaStreamId" },
+            { "$ref": "#/definitions/GeoShapeStreamId" },
+            { "$ref": "#/definitions/PlaceStreamId" }
+          ]
+        },
+        "audience": {
+          "description": "An intended audience, i.e. a group for whom something was created.",
+          "$ref": "#/definitions/AudienceStreamId"
+        },
+        "availableChannel": {
+          "description": "A means of accessing the service (e.g. a phone bank, a web site, a location, etc.).",
+          "oneOf": [
+            { "$ref": "#/definitions/ServiceChannelStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ServiceChannelStreamId" }
+            }
+          ]
+        },
+        "award": {
+          "description": "An award won by or for this item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "brand": {
+          "description": "The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.",
+          "anyOf": [
+            { "$ref": "#/definitions/BrandStreamId" },
+            { "$ref": "#/definitions/OrganizationStreamId" }
+          ]
+        },
+        "broker": {
+          "description": "An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "category": {
+          "description": "A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "type": "string" },
+                { "$ref": "#/definitions/PhysicalActivityCategoryStreamId" },
+                { "$ref": "#/definitions/ThingStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "type": "string" },
+                  { "$ref": "#/definitions/PhysicalActivityCategoryStreamId" },
+                  { "$ref": "#/definitions/ThingStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "hasOfferCatalog": {
+          "description": "Indicates an OfferCatalog listing for this Organization, Person, or Service.",
+          "oneOf": [
+            { "$ref": "#/definitions/OfferCatalogStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/OfferCatalogStreamId" }
+            }
+          ]
+        },
+        "hoursAvailable": {
+          "description": "The hours during which this service or contact is available.",
+          "$ref": "#/definitions/OpeningHoursSpecificationStreamId"
+        },
+        "isRelatedTo": {
+          "description": "A pointer to another, somehow related product (or multiple products).",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/ProductStreamId" },
+                { "$ref": "#/definitions/ServiceStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/ProductStreamId" },
+                  { "$ref": "#/definitions/ServiceStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "isSimilarTo": {
+          "description": "A pointer to another, functionally similar product (or multiple products).",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/ProductStreamId" },
+                { "$ref": "#/definitions/ServiceStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/ProductStreamId" },
+                  { "$ref": "#/definitions/ServiceStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "logo": {
+          "description": "An associated logo.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "offers": {
+          "description": "An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.\n      ",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/DemandStreamId" },
+                { "$ref": "#/definitions/OfferStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/DemandStreamId" },
+                  { "$ref": "#/definitions/OfferStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "produces": {
+          "description": "The tangible thing generated by the service, e.g. a passport, permit, etc.",
+          "$ref": "#/definitions/ThingStreamId"
+        },
+        "provider": {
+          "description": "The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.",
+          "anyOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            { "$ref": "#/definitions/PersonStreamId" }
+          ]
+        },
+        "providerMobility": {
+          "description": "Indicates the mobility of a provided service (e.g. 'static', 'dynamic').",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "review": {
+          "description": "A review of the item.",
+          "oneOf": [
+            { "$ref": "#/definitions/ReviewStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ReviewStreamId" }
+            }
+          ]
+        },
+        "serviceArea": {
+          "description": "The geographic area where the service is provided.",
+          "anyOf": [
+            { "$ref": "#/definitions/AdministrativeAreaStreamId" },
+            { "$ref": "#/definitions/GeoShapeStreamId" },
+            { "$ref": "#/definitions/PlaceStreamId" }
+          ]
+        },
+        "serviceAudience": {
+          "description": "The audience eligible for this service.",
+          "$ref": "#/definitions/AudienceStreamId"
+        },
+        "serviceOutput": {
+          "description": "The tangible thing generated by the service, e.g. a passport, permit, etc.",
+          "$ref": "#/definitions/ThingStreamId"
+        },
+        "serviceType": {
+          "description": "The type of service being offered, e.g. veterans' benefits, emergency relief, etc.",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/GovernmentBenefitsTypeStreamId" }
+          ]
+        },
+        "slogan": {
+          "description": "A slogan or motto associated with the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "termsOfService": {
+          "description": "Human-readable terms of service documentation.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "type": "string" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "type": "string" }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "Intangible": {
+      "title": "Intangible",
+      "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of item.",
+          "$ref": "#/definitions/Thing"
+        }
+      ]
+    },
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PropertyValueStreamId" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/CreativeWorkStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/CreativeWorkStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStreamId" }
+            }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/CreativeWorkStreamId" },
+                { "$ref": "#/definitions/EventStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/CreativeWorkStreamId" },
+                  { "$ref": "#/definitions/EventStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "PlaceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bajsbsb34i3zey5pd7km03njsd2d2e4d0jgok9j2803fvk08j9"
+    },
+    "OrganizationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+    },
+    "BroadcastFrequencySpecificationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b1z4szf80ic3933ow7za8u9n0zuwdzbs6glwljlh9zsjrwoxdt"
+    },
+    "BroadcastChannelStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148oafzpf1vvotjk0befpk86533aihuhbhd5nv2he0kdyky2ye8a"
+    },
+    "LanguageStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149yc3w2opfo5a6dzl7pul9773s0w87p57qcvpozj1v3xes0wu2z"
+    },
+    "BroadcastServiceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1499eaqoh3mwx7527h54tqae5vsbgkve99q6blieu6m81vvm8rej"
+    },
+    "AggregateRatingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145v3cwrrnkjoacdlkfexs0b4xwc6whza8gnmtuik3ipc49q7bqx"
+    },
+    "AdministrativeAreaStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145ef0jmo9sotumz4319vkhzxa3xbtlqvlmeumd2xhfv7ebay7li"
+    },
+    "GeoShapeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148zivvwdyfe4929mo3z2tcujrl44zicei7dh9ozhxntqrpg2x9y"
+    },
+    "AudienceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149jn3ma83ukeccidzrttzrtyk1wi2ev9wi7yhvqjdtbzsn0wtor"
+    },
+    "ServiceChannelStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a512yi6rgfnf8yb3dfjukoaxsxyltvkpabbvrchd7rc72zn2gt"
+    },
+    "BrandStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148zhy7x7m0bhxpmvp6p3jhzji96lkd9ff42jonm08uuzio2fr1r"
+    },
+    "PersonStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b0q0zecwbrtioa6v5z20xmbarlw0k18secwsjcezbfu49dhdt"
+    },
+    "PhysicalActivityCategoryStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14akfk5p5h1r5xk7fboq1wpo29l4oexjk1ezqe0i1lzwanr1lefb"
+    },
+    "ThingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149emvaopzokcdvhlgbxobcl4r8wx5z5ex431t6bvj0sqq8naqup"
+    },
+    "OfferCatalogStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14azcxc04n6i2vwscxqahuq2m3xoslir0txfbtagi6rnebt3rag2"
+    },
+    "OpeningHoursSpecificationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1482026xs1l3gefmup9er8zl8y4u0bb6xse7gognxa58z6km9omu"
+    },
+    "ProductStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1475y89ao9j60hp1g1aur4wlkykebmhgjsqc8vcyhwcl9ioiw8ry"
+    },
+    "ServiceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apaxtzw046uiy4u56c12lmh3emlkf0t7b92lmdnq8txtgcb4nr"
+    },
+    "ImageObjectStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+    },
+    "DemandStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ay12pnpo2n26694j0tt5fzm1v21tkhunaarmm1szn0m2ap5e03"
+    },
+    "OfferStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145c2jnc9g1v15f89uteou91ebt48pdighlctirasnxte9r0o8y7"
+    },
+    "ReviewStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b4fc7o72zuq9fdwmlp04s71v0dhi03ie5tt89melm5jstduc8"
+    },
+    "GovernmentBenefitsTypeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145o5a2ekhktq4r6idjdoyr3adekboblu0zxostb15yhae7mqosh"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "CreativeWorkStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+    },
+    "ActionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+    },
+    "EventStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+    }
+  }
+}

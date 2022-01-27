@@ -1,0 +1,345 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AddAction",
+  "description": "The act of editing by adding an object to a collection.",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "The act of managing by changing/editing the state of the object.",
+      "$ref": "#/definitions/UpdateAction"
+    }
+  ],
+  "definitions": {
+    "UpdateAction": {
+      "title": "UpdateAction",
+      "description": "The act of managing by changing/editing the state of the object.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "An action performed by a direct agent and indirect participants upon a direct object. Optionally happens at a location with the help of an inanimate instrument. The execution of the action may produce a result. Specific action sub-type documentation specifies the exact expectation of each argument/role.\\n\\nSee also [blog post](http://blog.schema.org/2014/04/announcing-schemaorg-actions.html) and [Actions overview document](https://schema.org/docs/actions.html).",
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "properties": {
+        "collection": {
+          "description": "A sub property of object. The collection target of the action.",
+          "oneOf": [
+            { "$ref": "#/definitions/ThingStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ThingStreamId" }
+            }
+          ]
+        },
+        "targetCollection": {
+          "description": "A sub property of object. The collection target of the action.",
+          "oneOf": [
+            { "$ref": "#/definitions/ThingStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ThingStreamId" }
+            }
+          ]
+        }
+      }
+    },
+    "Action": {
+      "title": "Action",
+      "description": "An action performed by a direct agent and indirect participants upon a direct object. Optionally happens at a location with the help of an inanimate instrument. The execution of the action may produce a result. Specific action sub-type documentation specifies the exact expectation of each argument/role.\\n\\nSee also [blog post](http://blog.schema.org/2014/04/announcing-schemaorg-actions.html) and [Actions overview document](https://schema.org/docs/actions.html).",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of item.",
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "properties": {
+        "actionStatus": {
+          "description": "Indicates the current disposition of the Action.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStatusTypeStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStatusTypeStreamId" }
+            }
+          ]
+        },
+        "agent": {
+          "description": "The direct performer or driver of the action (animate or inanimate). e.g. *John* wrote a book.",
+          "anyOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            { "$ref": "#/definitions/PersonStreamId" }
+          ]
+        },
+        "endTime": {
+          "description": "The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to *December*. For media, including audio and video, it's the time offset of the end of a clip within a larger file.\\n\\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.",
+          "anyOf": [
+            { "type": "string", "format": "date-time" },
+            { "type": "string", "format": "time" }
+          ]
+        },
+        "error": {
+          "description": "For failed actions, more information on the cause of the failure.",
+          "oneOf": [
+            { "$ref": "#/definitions/ThingStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ThingStreamId" }
+            }
+          ]
+        },
+        "instrument": {
+          "description": "The object that helped the agent perform the action. e.g. John wrote a book with *a pen*.",
+          "$ref": "#/definitions/ThingStreamId"
+        },
+        "location": {
+          "description": "The location of, for example, where an event is happening, where an organization is located, or where an action takes place.",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/PlaceStreamId" },
+            { "$ref": "#/definitions/PostalAddressStreamId" },
+            { "$ref": "#/definitions/VirtualLocationStreamId" }
+          ]
+        },
+        "object": {
+          "description": "The object upon which the action is carried out, whose state is kept intact or changed. Also known as the semantic roles patient, affected or undergoer (which change their state) or theme (which doesn't). e.g. John read *a book*.",
+          "$ref": "#/definitions/ThingStreamId"
+        },
+        "participant": {
+          "description": "Other co-agents that participated in the action indirectly. e.g. John wrote a book with *Steve*.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/OrganizationStreamId" },
+                { "$ref": "#/definitions/PersonStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/OrganizationStreamId" },
+                  { "$ref": "#/definitions/PersonStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "result": {
+          "description": "The result produced in the action. e.g. John wrote *a book*.",
+          "$ref": "#/definitions/ThingStreamId"
+        },
+        "startTime": {
+          "description": "The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from *January* to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.\\n\\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.",
+          "anyOf": [
+            { "type": "string", "format": "date-time" },
+            { "type": "string", "format": "time" }
+          ]
+        },
+        "target": {
+          "description": "Indicates a target EntryPoint for an Action.",
+          "oneOf": [
+            { "$ref": "#/definitions/EntryPointStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/EntryPointStreamId" }
+            }
+          ]
+        }
+      }
+    },
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PropertyValueStreamId" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/CreativeWorkStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/CreativeWorkStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStreamId" }
+            }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/CreativeWorkStreamId" },
+                { "$ref": "#/definitions/EventStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/CreativeWorkStreamId" },
+                  { "$ref": "#/definitions/EventStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "ThingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149emvaopzokcdvhlgbxobcl4r8wx5z5ex431t6bvj0sqq8naqup"
+    },
+    "ActionStatusTypeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1493t8001qaaiymwo19wh0mb4nbzm7emy78vo34uk4d6keht6m4d"
+    },
+    "OrganizationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+    },
+    "PersonStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b0q0zecwbrtioa6v5z20xmbarlw0k18secwsjcezbfu49dhdt"
+    },
+    "PlaceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bajsbsb34i3zey5pd7km03njsd2d2e4d0jgok9j2803fvk08j9"
+    },
+    "PostalAddressStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a4brivqraxql3nu7w003p0qb33jnlas5zuiuue6bfcokyl48l6"
+    },
+    "VirtualLocationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14auw1sosj3txwawjxda1laucjhba9fu16254g9uln3d0jsujy6f"
+    },
+    "EntryPointStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ala89xnx4rnpd9f2aoyq2dxz3p2auyhlka24ei7iqefr3ganus"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "ImageObjectStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+    },
+    "CreativeWorkStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+    },
+    "ActionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+    },
+    "EventStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+    }
+  }
+}

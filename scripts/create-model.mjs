@@ -6,7 +6,7 @@ import { DID } from "dids";
 import { Ed25519Provider } from "key-did-provider-ed25519";
 import { getResolver } from "key-did-resolver";
 import { fromString } from "uint8arrays";
-import { createRequire } from "module";
+import SchemaOrg from "schema-org-json-schemas";
 import { createModel } from "../index.mjs";
 import prettier from "prettier";
 
@@ -17,12 +17,6 @@ if (!process.env.SEED) {
 if (!process.env.CERAMIC_HOST) {
   throw new Error("Missing CERAMIC_HOST environment variable");
 }
-
-if (process.argv.length < 3) {
-  throw new Error("Usage: create-model.mjs <Class>");
-}
-
-const className = process.argv[2];
 
 // The seed must be provided as an environment variable
 const seed = fromString(process.env.SEED, "base16");
@@ -40,12 +34,16 @@ ceramic.did = did;
 // Create a manager for the model
 const manager = new ModelManager(ceramic);
 
-const schema = await createModel(ceramic, manager, className);
+for (let i = 0; i < Object.keys(SchemaOrg).length; i++) {
+  const key = Object.keys(SchemaOrg)[i];
 
-await writeFile(
-  new URL(`../schemas-ceramic/${className}.schema.json`, import.meta.url),
-  prettier.format(JSON.stringify(schema), { parser: "json" })
-);
+  const schema = await createModel(ceramic, manager, key);
+
+  await writeFile(
+    new URL(`../schemas-ceramic/${key}.schema.json`, import.meta.url),
+    prettier.format(JSON.stringify(schema), { parser: "json" })
+  );
+}
 
 // Write model to JSON file
 await writeFile(

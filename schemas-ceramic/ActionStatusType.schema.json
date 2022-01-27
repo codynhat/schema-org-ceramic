@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ActionStatusType",
+  "description": "The status of an Action.",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "Lists or enumerations dealing with status types.",
+      "$ref": "#/definitions/StatusEnumeration"
+    }
+  ],
+  "definitions": {
+    "StatusEnumeration": {
+      "title": "StatusEnumeration",
+      "description": "Lists or enumerations dealing with status types.",
+      "type": "object"
+    }
+  }
+}

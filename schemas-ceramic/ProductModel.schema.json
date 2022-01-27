@@ -1,0 +1,756 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProductModel",
+  "description": "A datasheet or vendor specification of a product (in the sense of a prototypical description).",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "Any offered product or service. For example: a pair of shoes; a concert ticket; the rental of a car; a haircut; or an episode of a TV show streamed online.",
+      "$ref": "#/definitions/Product"
+    }
+  ],
+  "properties": {
+    "isVariantOf": {
+      "description": "Indicates the kind of product that this is a variant of. In the case of [[ProductModel]], this is a pointer (from a ProductModel) to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive. In the case of a [[ProductGroup]], the group description also serves as a template, representing a set of Products that vary on explicitly defined, specific dimensions only (so it defines both a set of variants, as well as which values distinguish amongst those variants). When used with [[ProductGroup]], this property can apply to any [[Product]] included in the group.",
+      "oneOf": [
+        {
+          "anyOf": [
+            { "$ref": "#/definitions/ProductGroupStreamId" },
+            { "$ref": "#/definitions/ProductModelStreamId" }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/definitions/ProductGroupStreamId" },
+              { "$ref": "#/definitions/ProductModelStreamId" }
+            ]
+          }
+        }
+      ]
+    },
+    "predecessorOf": {
+      "description": "A pointer from a previous, often discontinued variant of the product to its newer variant.",
+      "oneOf": [
+        { "$ref": "#/definitions/ProductModelStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ProductModelStreamId" }
+        }
+      ]
+    },
+    "successorOf": {
+      "description": "A pointer from a newer variant of a product  to its previous, often discontinued predecessor.",
+      "oneOf": [
+        { "$ref": "#/definitions/ProductModelStreamId" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ProductModelStreamId" }
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "Product": {
+      "title": "Product",
+      "description": "Any offered product or service. For example: a pair of shoes; a concert ticket; the rental of a car; a haircut; or an episode of a TV show streamed online.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of item.",
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "properties": {
+        "additionalProperty": {
+          "description": "A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\\n\\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.\n",
+          "oneOf": [
+            { "$ref": "#/definitions/PropertyValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/PropertyValueStreamId" }
+            }
+          ]
+        },
+        "aggregateRating": {
+          "description": "The overall rating, based on a collection of reviews or ratings, of the item.",
+          "$ref": "#/definitions/AggregateRatingStreamId"
+        },
+        "audience": {
+          "description": "An intended audience, i.e. a group for whom something was created.",
+          "$ref": "#/definitions/AudienceStreamId"
+        },
+        "award": {
+          "description": "An award won by or for this item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "awards": {
+          "description": "Awards won by or for this item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "brand": {
+          "description": "The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.",
+          "anyOf": [
+            { "$ref": "#/definitions/BrandStreamId" },
+            { "$ref": "#/definitions/OrganizationStreamId" }
+          ]
+        },
+        "category": {
+          "description": "A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "type": "string" },
+                { "$ref": "#/definitions/PhysicalActivityCategoryStreamId" },
+                { "$ref": "#/definitions/ThingStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "type": "string" },
+                  { "$ref": "#/definitions/PhysicalActivityCategoryStreamId" },
+                  { "$ref": "#/definitions/ThingStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "color": {
+          "description": "The color of the product.",
+          "type": "string"
+        },
+        "countryOfAssembly": {
+          "description": "The place where the product was assembled.",
+          "type": "string"
+        },
+        "countryOfLastProcessing": {
+          "description": "The place where the item (typically [[Product]]) was last processed and tested before importation.",
+          "type": "string"
+        },
+        "countryOfOrigin": {
+          "description": "The country of origin of something, including products as well as creative  works such as movie and TV content.\n\nIn the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties such as [[contentLocation]] and [[locationCreated]] may be more applicable.\n\nIn the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.",
+          "$ref": "#/definitions/CountryStreamId"
+        },
+        "depth": {
+          "description": "The depth of the item.",
+          "anyOf": [
+            { "type": "string", "$comment": "https://schema.org/Distance" },
+            { "$ref": "#/definitions/QuantitativeValueStreamId" }
+          ]
+        },
+        "gtin": {
+          "description": "A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin)). GTINs identify trade items, including products and services, using numeric identification codes. The [[gtin]] property generalizes the earlier [[gtin8]], [[gtin12]], [[gtin13]], and [[gtin14]] properties. The GS1 [digital link specifications](https://www.gs1.org/standards/Digital-Link/) express GTINs as URLs. A correct [[gtin]] value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a \"GS1 Digital Link\" URL based on such a string. The numeric component should also have a [valid GS1 check digit](https://www.gs1.org/services/check-digit-calculator) and meet the other rules for valid GTINs. See also [GS1's GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) and [Wikipedia](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) for more details. Left-padding of the gtin values is not required or encouraged.\n   ",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "gtin12": {
+          "description": "The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
+          "type": "string"
+        },
+        "gtin13": {
+          "description": "The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
+          "type": "string"
+        },
+        "gtin14": {
+          "description": "The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
+          "type": "string"
+        },
+        "gtin8": {
+          "description": "The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
+          "type": "string"
+        },
+        "hasEnergyConsumptionDetails": {
+          "description": "Defines the energy efficiency Category (also known as \"class\" or \"rating\") for a product according to an international energy efficiency standard.",
+          "oneOf": [
+            { "$ref": "#/definitions/EnergyConsumptionDetailsStreamId" },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnergyConsumptionDetailsStreamId"
+              }
+            }
+          ]
+        },
+        "hasMeasurement": {
+          "description": "A product measurement, for example the inseam of pants, the wheel size of a bicycle, or the gauge of a screw. Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.",
+          "oneOf": [
+            { "$ref": "#/definitions/QuantitativeValueStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/QuantitativeValueStreamId" }
+            }
+          ]
+        },
+        "hasMerchantReturnPolicy": {
+          "description": "Specifies a MerchantReturnPolicy that may be applicable.",
+          "oneOf": [
+            { "$ref": "#/definitions/MerchantReturnPolicyStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/MerchantReturnPolicyStreamId" }
+            }
+          ]
+        },
+        "height": {
+          "description": "The height of the item.",
+          "anyOf": [
+            { "type": "string", "$comment": "https://schema.org/Distance" },
+            { "$ref": "#/definitions/QuantitativeValueStreamId" }
+          ]
+        },
+        "inProductGroupWithID": {
+          "description": "Indicates the [[productGroupID]] for a [[ProductGroup]] that this product [[isVariantOf]]. ",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "isAccessoryOrSparePartFor": {
+          "description": "A pointer to another product (or multiple products) for which this product is an accessory or spare part.",
+          "oneOf": [
+            { "$ref": "#/definitions/ProductStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ProductStreamId" }
+            }
+          ]
+        },
+        "isConsumableFor": {
+          "description": "A pointer to another product (or multiple products) for which this product is a consumable.",
+          "oneOf": [
+            { "$ref": "#/definitions/ProductStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ProductStreamId" }
+            }
+          ]
+        },
+        "isRelatedTo": {
+          "description": "A pointer to another, somehow related product (or multiple products).",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/ProductStreamId" },
+                { "$ref": "#/definitions/ServiceStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/ProductStreamId" },
+                  { "$ref": "#/definitions/ServiceStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "isSimilarTo": {
+          "description": "A pointer to another, functionally similar product (or multiple products).",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/ProductStreamId" },
+                { "$ref": "#/definitions/ServiceStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/ProductStreamId" },
+                  { "$ref": "#/definitions/ServiceStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "isVariantOf": {
+          "description": "Indicates the kind of product that this is a variant of. In the case of [[ProductModel]], this is a pointer (from a ProductModel) to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive. In the case of a [[ProductGroup]], the group description also serves as a template, representing a set of Products that vary on explicitly defined, specific dimensions only (so it defines both a set of variants, as well as which values distinguish amongst those variants). When used with [[ProductGroup]], this property can apply to any [[Product]] included in the group.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/ProductGroupStreamId" },
+                { "$ref": "#/definitions/ProductModelStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/ProductGroupStreamId" },
+                  { "$ref": "#/definitions/ProductModelStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "itemCondition": {
+          "description": "A predefined value from OfferItemCondition specifying the condition of the product or service, or the products or services included in the offer. Also used for product return policies to specify the condition of products accepted for returns.",
+          "oneOf": [
+            { "$ref": "#/definitions/OfferItemConditionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/OfferItemConditionStreamId" }
+            }
+          ]
+        },
+        "logo": {
+          "description": "An associated logo.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "manufacturer": {
+          "description": "The manufacturer of the product.",
+          "$ref": "#/definitions/OrganizationStreamId"
+        },
+        "material": {
+          "description": "A material that something is made from, e.g. leather, wool, cotton, paper.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "type": "string" },
+                { "$ref": "#/definitions/ProductStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "type": "string" },
+                  { "$ref": "#/definitions/ProductStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "model": {
+          "description": "The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/ProductModelStreamId" }
+          ]
+        },
+        "mpn": {
+          "description": "The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.",
+          "type": "string"
+        },
+        "nsn": {
+          "description": "Indicates the [NATO stock number](https://en.wikipedia.org/wiki/NATO_Stock_Number) (nsn) of a [[Product]]. ",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "offers": {
+          "description": "An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.\n      ",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/DemandStreamId" },
+                { "$ref": "#/definitions/OfferStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/DemandStreamId" },
+                  { "$ref": "#/definitions/OfferStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "pattern": {
+          "description": "A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'. Values are typically expressed as text, although links to controlled value schemes are also supported.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string" },
+                { "$ref": "#/definitions/DefinedTermStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  { "$ref": "#/definitions/DefinedTermStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "productID": {
+          "description": "The product identifier, such as ISBN. For example: ``` meta itemprop=\"productID\" content=\"isbn:123-456-789\" ```.",
+          "type": "string"
+        },
+        "productionDate": {
+          "description": "The date of production of the item, e.g. vehicle.",
+          "type": "string",
+          "format": "date"
+        },
+        "purchaseDate": {
+          "description": "The date the item e.g. vehicle was purchased by the current owner.",
+          "type": "string",
+          "format": "date"
+        },
+        "releaseDate": {
+          "description": "The release date of a product or product model. This can be used to distinguish the exact variant of a product.",
+          "type": "string",
+          "format": "date"
+        },
+        "review": {
+          "description": "A review of the item.",
+          "oneOf": [
+            { "$ref": "#/definitions/ReviewStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ReviewStreamId" }
+            }
+          ]
+        },
+        "reviews": {
+          "description": "Review of the item.",
+          "oneOf": [
+            { "$ref": "#/definitions/ReviewStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ReviewStreamId" }
+            }
+          ]
+        },
+        "size": {
+          "description": "A standardized size of a product or creative work, specified either through a simple textual string (for example 'XL', '32Wx34L'), a  QuantitativeValue with a unitCode, or a comprehensive and structured [[SizeSpecification]]; in other cases, the [[width]], [[height]], [[depth]] and [[weight]] properties may be more applicable. ",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string" },
+                { "$ref": "#/definitions/DefinedTermStreamId" },
+                { "$ref": "#/definitions/QuantitativeValueStreamId" },
+                { "$ref": "#/definitions/SizeSpecificationStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  { "$ref": "#/definitions/DefinedTermStreamId" },
+                  { "$ref": "#/definitions/QuantitativeValueStreamId" },
+                  { "$ref": "#/definitions/SizeSpecificationStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "sku": {
+          "description": "The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.",
+          "type": "string"
+        },
+        "slogan": {
+          "description": "A slogan or motto associated with the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "weight": {
+          "description": "The weight of the product or person.",
+          "$ref": "#/definitions/QuantitativeValueStreamId"
+        },
+        "width": {
+          "description": "The width of the item.",
+          "anyOf": [
+            { "type": "string", "$comment": "https://schema.org/Distance" },
+            { "$ref": "#/definitions/QuantitativeValueStreamId" }
+          ]
+        }
+      }
+    },
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PropertyValueStreamId" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/CreativeWorkStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/CreativeWorkStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStreamId" }
+            }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/CreativeWorkStreamId" },
+                { "$ref": "#/definitions/EventStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/CreativeWorkStreamId" },
+                  { "$ref": "#/definitions/EventStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "ProductGroupStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14azt565oav29yiur2f14p6jxh5q5jkpgb7m1vrxmhoaf90e2fdp"
+    },
+    "ProductModelStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147d2y497htqizi3pjx9grapmb45maqsupgpmnc7hq9b2vdx8ait"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "AggregateRatingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145v3cwrrnkjoacdlkfexs0b4xwc6whza8gnmtuik3ipc49q7bqx"
+    },
+    "AudienceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149jn3ma83ukeccidzrttzrtyk1wi2ev9wi7yhvqjdtbzsn0wtor"
+    },
+    "BrandStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148zhy7x7m0bhxpmvp6p3jhzji96lkd9ff42jonm08uuzio2fr1r"
+    },
+    "OrganizationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+    },
+    "PhysicalActivityCategoryStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14akfk5p5h1r5xk7fboq1wpo29l4oexjk1ezqe0i1lzwanr1lefb"
+    },
+    "ThingStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149emvaopzokcdvhlgbxobcl4r8wx5z5ex431t6bvj0sqq8naqup"
+    },
+    "CountryStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14an9hnvnxx9nhxl4q6axk1zu61o8my4wq8m91bdhb38x3tahww7"
+    },
+    "QuantitativeValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apxnix8kswndn6hwtvdh095yubu8fo0unmstgr22iztmcmi85d"
+    },
+    "EnergyConsumptionDetailsStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1492tcppy7m10809nwxiqctk0q4qk7ega3c4tk6qx8m2qt5pdydd"
+    },
+    "MerchantReturnPolicyStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145aedek75otnjxtgj7k0lm9qfh9nc6qjfrslsxpfgp1mcm24im4"
+    },
+    "ProductStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1475y89ao9j60hp1g1aur4wlkykebmhgjsqc8vcyhwcl9ioiw8ry"
+    },
+    "ServiceStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apaxtzw046uiy4u56c12lmh3emlkf0t7b92lmdnq8txtgcb4nr"
+    },
+    "OfferItemConditionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1474hjhjkn2bb0vemux743uc57cdjo7jqej0kd3kb47mv3tkslfq"
+    },
+    "ImageObjectStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+    },
+    "DemandStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ay12pnpo2n26694j0tt5fzm1v21tkhunaarmm1szn0m2ap5e03"
+    },
+    "OfferStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145c2jnc9g1v15f89uteou91ebt48pdighlctirasnxte9r0o8y7"
+    },
+    "DefinedTermStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a0z1mgs4luwb7ngdgmbwscgwruwx9vkcjr067sj1bs5yso1vmh"
+    },
+    "ReviewStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b4fc7o72zuq9fdwmlp04s71v0dhi03ie5tt89melm5jstduc8"
+    },
+    "SizeSpecificationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a4tik0wrcgtnzzw98r65vcpo7aw0iu4yokrnyp6uy3us2pz2j4"
+    },
+    "CreativeWorkStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+    },
+    "ActionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+    },
+    "EventStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+    }
+  }
+}

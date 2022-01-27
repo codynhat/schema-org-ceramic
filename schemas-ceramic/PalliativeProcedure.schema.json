@@ -1,0 +1,466 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PalliativeProcedure",
+  "description": "A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "A process of care used in either a diagnostic, therapeutic, preventive or palliative capacity that relies on invasive (surgical), non-invasive, or other techniques.",
+      "$ref": "#/definitions/MedicalProcedure"
+    },
+    {
+      "description": "Any medical intervention designed to prevent, treat, and cure human diseases and medical conditions, including both curative and palliative therapies. Medical therapies are typically processes of care relying upon pharmacotherapy, behavioral therapy, supportive therapy (with fluid or nutrition for example), or detoxification (e.g. hemodialysis) aimed at improving or preventing a health condition.",
+      "$ref": "#/definitions/MedicalTherapy"
+    }
+  ],
+  "definitions": {
+    "MedicalProcedure": {
+      "title": "MedicalProcedure",
+      "description": "A process of care used in either a diagnostic, therapeutic, preventive or palliative capacity that relies on invasive (surgical), non-invasive, or other techniques.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of entity related to health and the practice of medicine.",
+          "$ref": "#/definitions/MedicalEntity"
+        }
+      ],
+      "properties": {
+        "bodyLocation": {
+          "description": "Location in the body of the anatomical structure.",
+          "type": "string"
+        },
+        "followup": {
+          "description": "Typical or recommended followup care after the procedure is performed.",
+          "type": "string"
+        },
+        "howPerformed": {
+          "description": "How the procedure is performed.",
+          "type": "string"
+        },
+        "preparation": {
+          "description": "Typical preparation that a patient must undergo before having the procedure performed.",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/MedicalEntityStreamId" }
+          ]
+        },
+        "procedureType": {
+          "description": "The type of procedure, for example Surgical, Noninvasive, or Percutaneous.",
+          "$ref": "#/definitions/MedicalProcedureTypeStreamId"
+        },
+        "status": {
+          "description": "The status of the study (enumerated).",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/EventStatusTypeStreamId" },
+            { "$ref": "#/definitions/MedicalStudyStatusStreamId" }
+          ]
+        }
+      }
+    },
+    "MedicalEntity": {
+      "title": "MedicalEntity",
+      "description": "The most generic type of entity related to health and the practice of medicine.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "The most generic type of item.",
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "properties": {
+        "code": {
+          "description": "A medical code for the entity, taken from a controlled vocabulary or ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.",
+          "oneOf": [
+            { "$ref": "#/definitions/MedicalCodeStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/MedicalCodeStreamId" }
+            }
+          ]
+        },
+        "guideline": {
+          "description": "A medical guideline related to this entity.",
+          "oneOf": [
+            { "$ref": "#/definitions/MedicalGuidelineStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/MedicalGuidelineStreamId" }
+            }
+          ]
+        },
+        "legalStatus": {
+          "description": "The drug or supplement's legal status, including any controlled substance schedules that apply.",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/DrugLegalStatusStreamId" },
+            { "$ref": "#/definitions/MedicalEnumerationStreamId" }
+          ]
+        },
+        "medicineSystem": {
+          "description": "The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.",
+          "$ref": "#/definitions/MedicineSystemStreamId"
+        },
+        "recognizingAuthority": {
+          "description": "If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.",
+          "oneOf": [
+            { "$ref": "#/definitions/OrganizationStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/OrganizationStreamId" }
+            }
+          ]
+        },
+        "relevantSpecialty": {
+          "description": "If applicable, a medical specialty in which this entity is relevant.",
+          "oneOf": [
+            { "$ref": "#/definitions/MedicalSpecialtyStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/MedicalSpecialtyStreamId" }
+            }
+          ]
+        },
+        "study": {
+          "description": "A medical study or trial related to this entity.",
+          "oneOf": [
+            { "$ref": "#/definitions/MedicalStudyStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/MedicalStudyStreamId" }
+            }
+          ]
+        }
+      }
+    },
+    "Thing": {
+      "title": "Thing",
+      "description": "The most generic type of item.",
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string" },
+        "@type": { "type": "string" },
+        "additionalType": {
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "alternateName": {
+          "description": "An alias for the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "description": {
+          "description": "A description of the item.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "disambiguatingDescription": {
+          "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.\n        ",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string" },
+            { "$ref": "#/definitions/PropertyValueStreamId" }
+          ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/ImageObjectStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/ImageObjectStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "mainEntityOfPage": {
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "#/definitions/CreativeWorkStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "#/definitions/CreativeWorkStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": { "description": "The name of the item.", "type": "string" },
+        "potentialAction": {
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.",
+          "oneOf": [
+            { "$ref": "#/definitions/ActionStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ActionStreamId" }
+            }
+          ]
+        },
+        "sameAs": {
+          "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "array", "items": { "type": "string", "format": "uri" } }
+          ]
+        },
+        "subjectOf": {
+          "description": "A CreativeWork or Event about this Thing.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "$ref": "#/definitions/CreativeWorkStreamId" },
+                { "$ref": "#/definitions/EventStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "$ref": "#/definitions/CreativeWorkStreamId" },
+                  { "$ref": "#/definitions/EventStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "MedicalTherapy": {
+      "title": "MedicalTherapy",
+      "description": "Any medical intervention designed to prevent, treat, and cure human diseases and medical conditions, including both curative and palliative therapies. Medical therapies are typically processes of care relying upon pharmacotherapy, behavioral therapy, supportive therapy (with fluid or nutrition for example), or detoxification (e.g. hemodialysis) aimed at improving or preventing a health condition.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "A medical procedure intended primarily for therapeutic purposes, aimed at improving a health condition.",
+          "$ref": "#/definitions/TherapeuticProcedure"
+        }
+      ],
+      "properties": {
+        "contraindication": {
+          "description": "A contraindication for this therapy.",
+          "oneOf": [
+            {
+              "anyOf": [
+                { "type": "string" },
+                { "$ref": "#/definitions/MedicalContraindicationStreamId" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  { "$ref": "#/definitions/MedicalContraindicationStreamId" }
+                ]
+              }
+            }
+          ]
+        },
+        "duplicateTherapy": {
+          "description": "A therapy that duplicates or overlaps this one.",
+          "oneOf": [
+            { "$ref": "#/definitions/MedicalTherapyStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/MedicalTherapyStreamId" }
+            }
+          ]
+        },
+        "seriousAdverseOutcome": {
+          "description": "A possible serious complication and/or serious side effect of this therapy. Serious adverse outcomes include those that are life-threatening; result in death, disability, or permanent damage; require hospitalization or prolong existing hospitalization; cause congenital anomalies or birth defects; or jeopardize the patient and may require medical or surgical intervention to prevent one of the outcomes in this definition.",
+          "oneOf": [
+            { "$ref": "#/definitions/MedicalEntityStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/MedicalEntityStreamId" }
+            }
+          ]
+        }
+      }
+    },
+    "TherapeuticProcedure": {
+      "title": "TherapeuticProcedure",
+      "description": "A medical procedure intended primarily for therapeutic purposes, aimed at improving a health condition.",
+      "type": "object",
+      "allOf": [
+        {
+          "description": "A process of care used in either a diagnostic, therapeutic, preventive or palliative capacity that relies on invasive (surgical), non-invasive, or other techniques.",
+          "$ref": "#/definitions/MedicalProcedure"
+        }
+      ],
+      "properties": {
+        "adverseOutcome": {
+          "description": "A possible complication and/or side effect of this therapy. If it is known that an adverse outcome is serious (resulting in death, disability, or permanent damage; requiring hospitalization; or is otherwise life-threatening or requires immediate medical attention), tag it as a seriouseAdverseOutcome instead.",
+          "oneOf": [
+            { "$ref": "#/definitions/MedicalEntityStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/MedicalEntityStreamId" }
+            }
+          ]
+        },
+        "doseSchedule": {
+          "description": "A dosing schedule for the drug for a given population, either observed, recommended, or maximum dose based on the type used.",
+          "oneOf": [
+            { "$ref": "#/definitions/DoseScheduleStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/DoseScheduleStreamId" }
+            }
+          ]
+        },
+        "drug": {
+          "description": "Specifying a drug or medicine used in a medication procedure.",
+          "oneOf": [
+            { "$ref": "#/definitions/DrugStreamId" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/DrugStreamId" }
+            }
+          ]
+        }
+      }
+    },
+    "MedicalEntityStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a917fmlzpscud3pa4dpmj21hvyqnvdi5pehl2afrosjreipzq3"
+    },
+    "MedicalProcedureTypeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ap3vf8zuz55uevs0087zl0zldewazfhqv4brytlk6z16pb2k9l"
+    },
+    "EventStatusTypeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149tbqzvlbqiq0od8rhcd9ngggl7fgq1k2nm4a0gpe46sf60rgxs"
+    },
+    "MedicalStudyStatusStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147wqs2lpuuq85jrju5vrr0h0htyp6whw25pm8qxmeeu8u3yff19"
+    },
+    "MedicalCodeStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14abuq3fp887sy3b0bzqqo3e3g3d8lar4nzzrmkfd3csxcrfz7dp"
+    },
+    "MedicalGuidelineStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149jtoglqno9e94lfmjwkfxylheudyqozhph5fe2l8vdxyaih0x9"
+    },
+    "DrugLegalStatusStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147kfxsl6lwhhlj2fd8rvprixshf7ez5npddduuv9m70kurb63kc"
+    },
+    "MedicalEnumerationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148pxpikouvucw11a64x6xxckl7fl7c7sm9hnmw7o1q1otflrzh1"
+    },
+    "MedicineSystemStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14addhulwvkw54g8s54yqybbqaakgmgapjkb987fhzd5nups3kkn"
+    },
+    "OrganizationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+    },
+    "MedicalSpecialtyStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14avt0vkzinqh6fzln1f5otirwcf7y08h4rerqz8xl6t4kj7yom9"
+    },
+    "MedicalStudyStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a25wvgmb3edcw6w914qud1ctqoiws449fttb6kxvrl9vlxg313"
+    },
+    "PropertyValueStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+    },
+    "ImageObjectStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+    },
+    "CreativeWorkStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+    },
+    "ActionStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+    },
+    "EventStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+    },
+    "MedicalContraindicationStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b553nrw0yhau008d80x9bdb2dab4g13a7fl9gdn0pajddcu6xb"
+    },
+    "MedicalTherapyStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147m4kvqr3q307ij64fdckcmg66dqhotiuza6vcu6qc38aqmueom"
+    },
+    "DoseScheduleStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14asvm44fyuk2d0r8ucze34ombj1awdd4tyv8rkg5zv5ljmuhymm"
+    },
+    "DrugStreamId": {
+      "type": "string",
+      "maxLength": 150,
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147bmycrnqwxj1mky6rx6yo190lggu1vldmf5fa7cu7s5je86uqy"
+    }
+  }
+}
