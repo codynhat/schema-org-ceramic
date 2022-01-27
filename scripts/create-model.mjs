@@ -1,6 +1,5 @@
 import { writeFile } from "node:fs/promises";
 import _ from "lodash";
-import prettier from "prettier";
 import { CeramicClient } from "@ceramicnetwork/http-client";
 import { ModelManager } from "@glazed/devtools";
 import { DID } from "dids";
@@ -9,6 +8,7 @@ import { getResolver } from "key-did-resolver";
 import { fromString } from "uint8arrays";
 import { createRequire } from "module";
 import { createModel } from "../index.mjs";
+import prettier from "prettier";
 
 if (!process.env.SEED) {
   throw new Error("Missing SEED environment variable");
@@ -40,7 +40,12 @@ ceramic.did = did;
 // Create a manager for the model
 const manager = new ModelManager(ceramic);
 
-await createModel(ceramic, manager, className);
+const schema = await createModel(ceramic, manager, className);
+
+await writeFile(
+  new URL(`../schemas-ceramic/${className}.schema.json`, import.meta.url),
+  prettier.format(JSON.stringify(schema), { parser: "json" })
+);
 
 // Write model to JSON file
 await writeFile(

@@ -93,4 +93,6 @@ export async function createModel(ceramic, manager, className) {
   doc.update(schema);
 
   console.log(`\nCreated schemas for ${className} -> ${schemaId}`);
+
+  return schema;
 }
