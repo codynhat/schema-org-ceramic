@@ -8,7 +8,7 @@ import { Ed25519Provider } from "key-did-provider-ed25519";
 import { getResolver } from "key-did-resolver";
 import { fromString } from "uint8arrays";
 import { createRequire } from "module";
-const require = createRequire(import.meta.url);
+import { createModel } from "../src/createModel.mjs";
 
 if (!process.env.SEED) {
   throw new Error("Missing SEED environment variable");
@@ -40,65 +40,7 @@ ceramic.did = did;
 // Create a manager for the model
 const manager = new ModelManager(ceramic);
 
-async function replaceSchemaReferences(schema, mainSchema) {
-  if (schema["$ref"] && schema["$ref"].startsWith("schema:")) {
-    const alias = schema["$ref"].split("schema:")[1];
-    const newSchema = require(`../schemas/${alias}.schema.json`);
-    let schemaId = manager.getSchemaID(alias);
-    if (!schemaId) {
-      schemaId = await manager.createSchema(alias, newSchema);
-      console.log(`Created schema ${alias} -> ${schemaId}`);
-
-      mainSchema["definitions"] = {
-        ...mainSchema.definitions,
-        [`${alias}StreamId`]: {
-          type: "string",
-          maxLength: 150,
-          $comment: `cip88:ref:ceramic://${schemaId}`,
-        },
-      };
-    }
-
-    // Replace $ref with CIP-82
-    schema["$ref"] = `#/definitions/${alias}StreamId`;
-    return;
-  }
-  if (schema.type === "array") {
-    await replaceSchemaReferences(schema.items, mainSchema ?? schema);
-  }
-  if (schema.type === "object") {
-    if (schema.properties != null) {
-      for (let i = 0; i < Object.values(schema.properties).length; i++) {
-        const prop = Object.values(schema.properties)[i];
-        await replaceSchemaReferences(prop, mainSchema ?? schema);
-      }
-    }
-
-    if (schema.definitions != null) {
-      for (let i = 0; i < Object.values(schema.definitions).length; i++) {
-        const prop = Object.values(schema.definitions)[i];
-        await replaceSchemaReferences(prop, mainSchema ?? schema);
-      }
-    }
-  }
-
-  // Update oneOf, anyOf, allOf
-  for (let x = 0; x < ["oneOf", "anyOf", "allOf"].length; x++) {
-    const key = ["oneOf", "anyOf", "allOf"][x];
-    if (schema[key] != null) {
-      for (let y = 0; y < schema[key].length; y++) {
-        const prop = schema[key][y];
-        await replaceSchemaReferences(prop, mainSchema ?? schema);
-      }
-    }
-  }
-}
-
-const schema = require(`../schemas/${className}.schema.json`);
-await replaceSchemaReferences(schema);
-
-const schemaId = await manager.createSchema(className, schema);
-console.log(`Created schema ${className} -> ${schemaId}`);
+await createModel(manager, className);
 
 // Write model to JSON file
 await writeFile(
