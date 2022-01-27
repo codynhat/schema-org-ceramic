@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Invoice",
   "description": "A statement of the money due for goods or services; a bill.",
   "type": "object",

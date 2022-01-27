@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Review",
   "description": "A review of an item - for example, of a restaurant, movie, or store.",
   "type": "object",

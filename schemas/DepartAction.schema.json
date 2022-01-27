@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "DepartAction",
   "description": "The act of  departing from a place. An agent departs from an fromLocation for a destination, optionally with participants.",
   "type": "object",

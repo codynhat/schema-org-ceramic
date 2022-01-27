@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "VideoGame",
   "description": "A video game is an electronic game that involves human interaction with a user interface to generate visual feedback on a video device.",
   "type": "object",

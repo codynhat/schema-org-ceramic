@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "VitalSign",
   "description": "Vital signs are measures of various physiological functions in order to assess the most basic body functions.",
   "type": "object",

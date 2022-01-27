@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Vein",
   "description": "A type of blood vessel that specifically carries blood to the heart.",
   "type": "object",

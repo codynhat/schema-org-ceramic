@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ActionAccessSpecification",
   "description": "A set of requirements that a must be fulfilled in order to perform an Action.",
   "type": "object",

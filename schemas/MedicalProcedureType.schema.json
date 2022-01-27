@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "MedicalProcedureType",
   "description": "An enumeration that describes different types of medical procedures.",
   "type": "object",

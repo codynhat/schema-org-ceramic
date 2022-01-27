@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "CommunicateAction",
   "description": "The act of conveying information to another person via a communication medium (instrument) such as speech, email, or telephone conversation.",
   "type": "object",

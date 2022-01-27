@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ReviewAction",
   "description": "The act of producing a balanced opinion about the object for an audience. An agent reviews an object with participants resulting in a review.",
   "type": "object",

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "PreventionIndication",
   "description": "An indication for preventing an underlying condition, symptom, etc.",
   "type": "object",

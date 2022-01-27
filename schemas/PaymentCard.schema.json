@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "PaymentCard",
   "description": "A payment method using a credit, debit, store or other card to associate the payment with an account.",
   "type": "object",

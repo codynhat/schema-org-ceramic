@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ComicSeries",
   "description": "A sequential publication of comic stories under a\n    \tunifying title, for example \"The Amazing Spider-Man\" or \"Groo the\n    \tWanderer\".",
   "type": "object",

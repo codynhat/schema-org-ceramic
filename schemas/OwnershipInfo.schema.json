@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "OwnershipInfo",
   "description": "A structured value providing information about when a certain organization or person owned a certain product.",
   "type": "object",

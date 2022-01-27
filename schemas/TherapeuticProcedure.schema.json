@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "TherapeuticProcedure",
   "description": "A medical procedure intended primarily for therapeutic purposes, aimed at improving a health condition.",
   "type": "object",

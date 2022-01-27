@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Legislation",
   "description": "A legal document such as an act, decree, bill, etc. (enforceable or not) or a component of a legal act (like an article).",
   "type": "object",

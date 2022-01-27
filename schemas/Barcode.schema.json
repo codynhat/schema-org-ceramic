@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Barcode",
   "description": "An image of a visual machine-readable code such as a barcode or QR code.",
   "type": "object",

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "UKNonprofitType",
   "description": "UKNonprofitType: Non-profit organization type originating from the United Kingdom.",
   "type": "object",

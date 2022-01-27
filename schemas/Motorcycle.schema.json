@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Motorcycle",
   "description": "A motorcycle or motorbike is a single-track, two-wheeled motor vehicle.",
   "type": "object",

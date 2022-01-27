@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Menu",
   "description": "A structured representation of food or drink items available from a FoodEstablishment.",
   "type": "object",

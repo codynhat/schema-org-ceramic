@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "WebPageElement",
   "description": "A web page element, like a table or an image.",
   "type": "object",

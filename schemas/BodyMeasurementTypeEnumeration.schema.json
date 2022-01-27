@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "BodyMeasurementTypeEnumeration",
   "description": "Enumerates types (or dimensions) of a person's body measurements, for example for fitting of clothes.",
   "type": "object",

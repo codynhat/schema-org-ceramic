@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Poster",
   "description": "A large, usually printed placard, bill, or announcement, often illustrated, that is posted to advertise or publicize something.",
   "type": "object",

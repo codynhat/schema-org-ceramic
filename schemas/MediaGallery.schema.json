@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "MediaGallery",
   "description": "Web page type: Media gallery page. A mixed-media page that can contains media such as images, videos, and other multimedia.",
   "type": "object",

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "HVACBusiness",
   "description": "A business that provide Heating, Ventilation and Air Conditioning services.",
   "type": "object",

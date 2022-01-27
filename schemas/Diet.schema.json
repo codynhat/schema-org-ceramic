@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Diet",
   "description": "A strategy of regulating the intake of food to achieve or maintain a specific health-related goal.",
   "type": "object",

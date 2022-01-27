@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "QuoteAction",
   "description": "An agent quotes/estimates/appraises an object/product/service with a price at a location/store.",
   "type": "object",

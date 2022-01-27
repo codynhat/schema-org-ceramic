@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Substance",
   "description": "Any matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical.",
   "type": "object",

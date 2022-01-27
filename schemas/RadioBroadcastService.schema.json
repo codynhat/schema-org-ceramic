@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "RadioBroadcastService",
   "description": "A delivery service through which radio content is provided via broadcast over the air or online.",
   "type": "object",

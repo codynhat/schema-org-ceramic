@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "DrugPrescriptionStatus",
   "description": "Indicates whether this drug is available by prescription or over-the-counter.",
   "type": "object",

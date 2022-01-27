@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Optician",
   "description": "A store that sells reading glasses and similar devices for improving vision.",
   "type": "object",

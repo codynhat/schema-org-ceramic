@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "MedicalEntity",
   "description": "The most generic type of entity related to health and the practice of medicine.",
   "type": "object",

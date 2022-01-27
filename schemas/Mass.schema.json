@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Mass",
   "description": "Properties that take Mass as values are of the form '<Number> <Mass unit of measure>'. E.g., '7 kg'.",
   "type": "object",

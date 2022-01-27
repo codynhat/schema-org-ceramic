@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "InvestmentOrDeposit",
   "description": "A type of financial product that typically requires the client to transfer funds to a financial service in return for potential beneficial financial return.",
   "type": "object",

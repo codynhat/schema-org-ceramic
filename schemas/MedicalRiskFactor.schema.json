@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "MedicalRiskFactor",
   "description": "A risk factor is anything that increases a person's likelihood of developing or contracting a disease, medical condition, or complication.",
   "type": "object",

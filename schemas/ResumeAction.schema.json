@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ResumeAction",
   "description": "The act of resuming a device or application which was formerly paused (e.g. resume music playback or resume a timer).",
   "type": "object",

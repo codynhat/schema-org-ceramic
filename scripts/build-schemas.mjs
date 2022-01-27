@@ -54,6 +54,7 @@ function addParentDefinitions(definitions, schemaFrom, schemaTo) {
 // Replace allOf references
 Object.keys(SchemaOrg).forEach((key) => {
   SchemaOrg[key] = replaceAllOf(SchemaOrg[key]);
+  SchemaOrg[key]["$schema"] = "http://json-schema.org/draft-07/schema#";
   delete SchemaOrg[key]["$id"];
 });
 

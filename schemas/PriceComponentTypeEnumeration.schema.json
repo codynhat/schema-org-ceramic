@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "PriceComponentTypeEnumeration",
   "description": "Enumerates different price components that together make up the total price for an offered product.",
   "type": "string",

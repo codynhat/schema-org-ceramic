@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "HealthPlanCostSharingSpecification",
   "description": "A description of costs to the patient under a given network or formulary.",
   "type": "object",

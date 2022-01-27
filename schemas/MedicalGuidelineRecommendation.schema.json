@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "MedicalGuidelineRecommendation",
   "description": "A guideline recommendation that is regarded as efficacious and where quality of the data supporting the recommendation is sound.",
   "type": "object",

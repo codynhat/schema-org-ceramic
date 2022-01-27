@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ProductModel",
   "description": "A datasheet or vendor specification of a product (in the sense of a prototypical description).",
   "type": "object",

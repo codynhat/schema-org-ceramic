@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "AssignAction",
   "description": "The act of allocating an action/event/task to some destination (someone or something).",
   "type": "object",

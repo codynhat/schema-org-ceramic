@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "MerchantReturnPolicySeasonalOverride",
   "description": "A seasonal override of a return policy, for example used for holidays.",
   "type": "object",

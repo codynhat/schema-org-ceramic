@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "MiddleSchool",
   "description": "A middle school (typically for children aged around 11-14, although this varies somewhat).",
   "type": "object",

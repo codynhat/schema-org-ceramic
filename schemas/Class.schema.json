@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Class",
   "description": "A class, also often called a 'Type'; equivalent to rdfs:Class.",
   "type": "object",

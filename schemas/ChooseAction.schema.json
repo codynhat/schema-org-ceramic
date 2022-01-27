@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ChooseAction",
   "description": "The act of expressing a preference from a set of options or a large or unbounded set of choices/options.",
   "type": "object",
