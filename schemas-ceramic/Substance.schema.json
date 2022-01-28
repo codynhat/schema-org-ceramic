@@ -229,72 +229,72 @@
     "MaximumDoseScheduleStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145osuuk28fv920hs50jzaidy96nl7xjd1pfbwoo9je4akw0msd8"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1474a3ndjimay3t9l34iabozjyxi8zqd5u7ax0f86ntg6dho260b"
     },
     "MedicalCodeStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14abuq3fp887sy3b0bzqqo3e3g3d8lar4nzzrmkfd3csxcrfz7dp"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1497mdq0f7sge1ecnmgbl8tyt51guyqv36admzl1s2d2dxa6lff3"
     },
     "MedicalGuidelineStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149jtoglqno9e94lfmjwkfxylheudyqozhph5fe2l8vdxyaih0x9"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149vk2he0a85fgr57o146r2g4z2jv3zcfdk4wyz60e1o9q052803"
     },
     "DrugLegalStatusStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147kfxsl6lwhhlj2fd8rvprixshf7ez5npddduuv9m70kurb63kc"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o46qr8wmv62mnws6wh1f37kh0g8dipd729upz2qbkughm3dod"
     },
     "MedicalEnumerationStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148pxpikouvucw11a64x6xxckl7fl7c7sm9hnmw7o1q1otflrzh1"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14677swexis4cnmnk07k24b9903jdg6dwmsf2xmu45vwg9xo8xqg"
     },
     "MedicineSystemStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14addhulwvkw54g8s54yqybbqaakgmgapjkb987fhzd5nups3kkn"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146q6i4t4ysjywnjytw6xjoag0vvwryimhh1xifvgkyym80e43fg"
     },
     "OrganizationStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149zpfembsexqyi99qgo5yfws9znr9rmoxvtdjntl3ki8fu1f2g3"
     },
     "MedicalSpecialtyStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14avt0vkzinqh6fzln1f5otirwcf7y08h4rerqz8xl6t4kj7yom9"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149fn49v92jnd58tx1z9ym94r9szr2loea4ulwapqvc6feo2l60a"
     },
     "MedicalStudyStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a25wvgmb3edcw6w914qud1ctqoiws449fttb6kxvrl9vlxg313"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145v6h8yhvmvcwpa5qbz9hkcj40p9mbmsp5vmv9if13fx03u0n6m"
     },
     "PropertyValueStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146l4icea15bgmlpj8brofd90wh8jbich62qba3uja4zg7jzrhgg"
     },
     "ImageObjectStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148lzzpczw20nuk4tli92hzn3fgpp3fsa2df6cd1djeqrpyntinw"
     },
     "CreativeWorkStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147r2mldf081wbv77nkeqi1kvnzqit3di2kym56sdvq797wlibww"
     },
     "ActionStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147o3tulyefcldl38gekuw15xrprtwfi4p5oabjrnngn58oqry8g"
     },
     "EventStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1493urqnbh2ofb9r4urmbsbw4arph4vy0yc0w14v8fl2p5hbnrgz"
     }
   }
 }

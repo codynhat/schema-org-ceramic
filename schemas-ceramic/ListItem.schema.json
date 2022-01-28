@@ -185,37 +185,37 @@
     "ThingStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149emvaopzokcdvhlgbxobcl4r8wx5z5ex431t6bvj0sqq8naqup"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1468sg9sgwl0essz570z702nnq2ev4wltu708kobkebs46eiwqj8"
     },
     "ListItemStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147t0mad6nftsenpuz8wquzvqm2hkc44ufrpgtk9nlxzhqx48hit"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145id7l4rrkfju5bmu78hvaj2wib01p4ryqsnt063mxb88vwckfu"
     },
     "PropertyValueStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146l4icea15bgmlpj8brofd90wh8jbich62qba3uja4zg7jzrhgg"
     },
     "ImageObjectStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148lzzpczw20nuk4tli92hzn3fgpp3fsa2df6cd1djeqrpyntinw"
     },
     "CreativeWorkStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147r2mldf081wbv77nkeqi1kvnzqit3di2kym56sdvq797wlibww"
     },
     "ActionStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147o3tulyefcldl38gekuw15xrprtwfi4p5oabjrnngn58oqry8g"
     },
     "EventStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1493urqnbh2ofb9r4urmbsbw4arph4vy0yc0w14v8fl2p5hbnrgz"
     }
   }
 }

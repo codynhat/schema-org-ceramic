@@ -124,37 +124,37 @@
     "PropertyValueStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146l4icea15bgmlpj8brofd90wh8jbich62qba3uja4zg7jzrhgg"
     },
     "QualitativeValueStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145s07jdrjthn4rj38skywzp24u6uzw4q03w7i20glmgrj107jaw"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147f3c62p7yavszbd1e1odyqhgstanb1c9g5us81h2t93cgs053w"
     },
     "DefinedTermStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a0z1mgs4luwb7ngdgmbwscgwruwx9vkcjr067sj1bs5yso1vmh"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14am3k29t6efk65dm7mzm6nr6dxnwtc8mvo3jo3glhbruh8ztr4w"
     },
     "EnumerationStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147r1obnvi3wsic6e6mlss5yefi1qb3oqg7xcw8v3wiyudtkif04"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14almfdlyazlp1lsvj2lludl7qgmtj3gbe3s4kst2ibt9oqym1wh"
     },
     "MeasurementTypeEnumerationStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149usqt2xw2il88jncmz2pvn0lvom3o8yf70d2dl8icuswe0wsa5"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145x6zig9c40ydowgxetrx24sa0n12ab12bpuc6miag2ozgcy5ha"
     },
     "QuantitativeValueStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apxnix8kswndn6hwtvdh095yubu8fo0unmstgr22iztmcmi85d"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146og3b4cri20az3h2wby85jonjy6ggsdqboy1rj5jt2wxbbn4yf"
     },
     "StructuredValueStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146zjnipc5khflth4ye71gw0ah5nf9sywc8flyx8kp3qmiz1sslr"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1472hdcc5ecc7ihxndrinckdcsgdzdrqju0upy5zg3352m3uyqs8"
     }
   }
 }

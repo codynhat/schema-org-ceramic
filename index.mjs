@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { createRequire } from "module";
 import { TileDocument } from "@ceramicnetwork/stream-tile";
+import jsonpatch from "fast-json-patch";
 const require = createRequire(import.meta.url);
 
 async function replaceSchemaReferences(ceramic, manager, schema, mainSchema) {
@@ -94,9 +95,16 @@ export async function createModel(ceramic, manager, className) {
   await replaceSchemaReferences(ceramic, manager, schema);
 
   const doc = await TileDocument.load(ceramic, schemaId);
-  doc.update(schema);
+  const patch = jsonpatch.compare(doc.content, schema);
 
-  console.log(`\nCreated schemas for ${className} -> ${schemaId}`);
+  if (patch.length > 0) {
+    doc.update(schema);
+    console.log(`Updated schema ${schema.title} -> ${schemaId}`);
+  } else {
+    console.log(
+      `No changes detected for schema ${schema.title} -> ${schemaId}`
+    );
+  }
 
   return schema;
 }

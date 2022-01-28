@@ -299,82 +299,82 @@
     "OfferStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145c2jnc9g1v15f89uteou91ebt48pdighlctirasnxte9r0o8y7"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146runcjq04edidr919d3gd90640fftr1mxmrser0z0ie4tdwfgr"
     },
     "PostalAddressStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a4brivqraxql3nu7w003p0qb33jnlas5zuiuue6bfcokyl48l6"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148x61wuf1guwmpgnvhrgm4znf5hmjzr9nspst45pbmutnz8be1i"
     },
     "OrganizationStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14ayp7kso0pyje84w3g1yppdm5akkuhl7v1eg4q9lf3xr4z5efb7"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149zpfembsexqyi99qgo5yfws9znr9rmoxvtdjntl3ki8fu1f2g3"
     },
     "PersonStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149b0q0zecwbrtioa6v5z20xmbarlw0k18secwsjcezbfu49dhdt"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14967smvamiz8ivkzbfp1yabzo7p6llzmhkurlme5n6ptqd8oe7f"
     },
     "ParcelDeliveryStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146r8vsbtzhf4jwp9hptsqctord4rzepz5z1xi0lkh640d3gypmx"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149qqxdqkxpqvum3cc4s8mz340f3y90xom1usoga9qrhtt33og0z"
     },
     "OrderStatusStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14av2rhk39y7do54v43hmc1edf6gh4p6qbyd5qcdpyczo0hgpcd4"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14690ba5vccx0k4l7pv9guot0x0tgq3pyxixksufu7lzo4a3zslm"
     },
     "OrderItemStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14bh10gir618wbmc1xv99gf38r0yh06ik59jfqhh89dfvx1qvpd6"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14a75ja45rmk9voad56oo652heuis07hw5ja0a7uyih39kivv8ed"
     },
     "ProductStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1475y89ao9j60hp1g1aur4wlkykebmhgjsqc8vcyhwcl9ioiw8ry"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1477oczz9ohoskepzzdp95ed1h6yzo8pkbj8mfdhmy5h8a7yx45w"
     },
     "ServiceStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14apaxtzw046uiy4u56c12lmh3emlkf0t7b92lmdnq8txtgcb4nr"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147985ei43bhh1azn247kbktq2fg1s129p74zrwfo4p0nj4ko2aw"
     },
     "InvoiceStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b2kzb5cxeohbuvmde4h0znboen3ywflexz1oivnz3b3odj9pz3"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145inwqfvc1gumfnfrzpow81w1g27onjq52xbpvm2pbajor6lr37"
     },
     "PaymentMethodStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw145vja3ygmcfigis6hanbkftar085uocj80fb3y5tgz173w984l1"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148mpkxt7rm5mxelzfe398bslp5azu0k8kg2t1yh2mil5rir88ux"
     },
     "PropertyValueStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149v5w9z1jnxch2tg75r489v6yxt558j09dz74ms7do61wacy0fu"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146l4icea15bgmlpj8brofd90wh8jbich62qba3uja4zg7jzrhgg"
     },
     "ImageObjectStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14b5bbyazbngvyuv7ncsun7rstp5r070tdlnhcfs26j95xqqgkgs"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148lzzpczw20nuk4tli92hzn3fgpp3fsa2df6cd1djeqrpyntinw"
     },
     "CreativeWorkStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw146ehaoksoabhqqw9hrzdy1g2ve3vhz95vcbvak0i4lsmej508wq"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147r2mldf081wbv77nkeqi1kvnzqit3di2kym56sdvq797wlibww"
     },
     "ActionStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw148tbi47l1m7shf49265jhcbi1dr6j544rngpm3wh3ow0o12l585"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw147o3tulyefcldl38gekuw15xrprtwfi4p5oabjrnngn58oqry8g"
     },
     "EventStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149o61wv1abph4xtvfkhin7rx6zg97qh2xs8yysgc6l9s6is13d7"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw1493urqnbh2ofb9r4urmbsbw4arph4vy0yc0w14v8fl2p5hbnrgz"
     }
   }
 }

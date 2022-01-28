@@ -41,7 +41,7 @@
     "LanguageStreamId": {
       "type": "string",
       "maxLength": 150,
-      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw149yc3w2opfo5a6dzl7pul9773s0w87p57qcvpozj1v3xes0wu2z"
+      "$comment": "cip88:ref:ceramic://kjzl6cwe1jw14aldumj6drrwrfpzpei8zyst017ahk7xscxrj1dcrzyx9k0s858"
     }
   }
 }

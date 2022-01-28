@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import _ from "lodash";
 import { CeramicClient } from "@ceramicnetwork/http-client";
 import { ModelManager } from "@glazed/devtools";
@@ -33,6 +33,15 @@ ceramic.did = did;
 
 // Create a manager for the model
 const manager = new ModelManager(ceramic);
+
+// Load existing model
+try {
+  const existingModel = JSON.parse(
+    await readFile(new URL("model.json", import.meta.url))
+  );
+
+  manager.addJSONModel(existingModel);
+} catch (err) {}
 
 for (let i = 0; i < Object.keys(SchemaOrg).length; i++) {
   const key = Object.keys(SchemaOrg)[i];
